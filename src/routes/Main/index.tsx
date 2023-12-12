@@ -7,7 +7,6 @@ export function Main() {
             <Header />
             <div>
                 <h1>Comming Soon</h1>
-                <a>What is Neobase?</a>
             </div>
         </div>
     );
