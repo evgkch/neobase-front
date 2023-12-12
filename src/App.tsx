@@ -10,7 +10,6 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { router } from "./routes";
 
 WebApp.ready();
-WebApp.BackButton.show();
 
 function App() {
   return (

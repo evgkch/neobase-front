@@ -1,0 +1,24 @@
+header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-inline: 1rex;
+    padding-block: 1rex;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--blue-color-0);
+    margin-inline: 1rex;
+}
+
+header #ton-connect-button {
+    margin-inline: 1rex;
+}
