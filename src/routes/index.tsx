@@ -7,12 +7,12 @@ import { Welcome } from "./Welcome";
   
 export const router = createBrowserRouter([
     {
-        path: "/",
+        path: "",
         element: <Welcome />,
         index: true
     },
     {
-        path: "/main",
+        path: "main",
         element: <Main />
     }
 ]);
