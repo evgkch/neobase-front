@@ -13,6 +13,7 @@ import { Welcome } from "./components/Welcome";
 
 WebApp.ready();
 WebApp.expand();
+WebApp.setHeaderColor("bg_color");
 
 function App() {
     const [loaded, setLoaded] = useState(false);
