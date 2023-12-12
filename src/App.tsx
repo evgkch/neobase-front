@@ -1,7 +1,9 @@
+import WebApp from "@twa-dev/sdk";
+
 import { useEffect, useState } from "react";
 import { RouterProvider } from "react-router-dom";
-import './index.css'
 
+import './index.css'
 import './App.css'
 
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
@@ -9,6 +11,8 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { router } from "./routes";  
 import { Welcome } from "./components/Welcome";
 
+WebApp.ready();
+WebApp.expand();
 
 function App() {
     const [loaded, setLoaded] = useState(false);

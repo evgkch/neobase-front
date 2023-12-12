@@ -1,7 +1,13 @@
+import { Header } from "../../components/Header"
+import "./style.css"
+
 export function Main() {
     return (
-        <div>
-            <h1>Welcome to Neobase</h1>
+        <div className="main">
+            <Header />
+            <div>
+                <h1>Comming Soon</h1>
+            </div>
         </div>
     );
 }
