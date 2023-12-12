@@ -1,7 +1,12 @@
+import WebApp from "@twa-dev/sdk";
 import { Header } from "../../components/Header"
 import "./style.css"
 
 export function Main() {
+
+    WebApp.setHeaderColor("#18191F");
+    WebApp.MainButton.disable();
+
     return (
         <div className="main">
             <Header />
