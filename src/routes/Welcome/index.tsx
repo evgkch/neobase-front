@@ -13,7 +13,7 @@ export const Welcome = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const cx = setTimeout(navigate, 2000, 'main');
+        const cx = setTimeout(navigate, 2000, '/main');
         return () => clearTimeout(cx);
     });
 
