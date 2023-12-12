@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
-import { Welcome } from '../components/Welcome';
-import * as Boaring from "./Solo/Boarding/Info";
+// import { TonConnectUIProvider } from '@tonconnect/ui-react';
+// import { Welcome } from '../components/Welcome';
+// import * as Boaring from "./Solo/Boarding/Info";
+import { Main } from "./Main";
   
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Boaring.Info accountCounter="..." fundBalance="..." />,
+        element: <Main />,
         
     }
 ]);

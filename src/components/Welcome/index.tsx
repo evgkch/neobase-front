@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import neobaseLogo from '/neobase.png'
 import './style.css'
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 
 export const Welcome = () => {
     return (
