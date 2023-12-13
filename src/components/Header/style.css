@@ -4,6 +4,7 @@ header {
     justify-content: space-between;
     padding-inline: 1rex;
     padding-block: 1rex;
+    background-color: var(--blue-color-0);
 }
 
 .user {
@@ -13,12 +14,13 @@ header {
 
 .avatar {
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    border: solid 2px white;
+    width: 28px;
+    height: 28px;
     background-color: var(--blue-color-0);
-    margin-inline: 1rex;
+    margin-inline: 1rem;
 }
 
 header #ton-connect-button {
-    margin-inline: 1rex;
+    margin-inline: 1rem;
 }

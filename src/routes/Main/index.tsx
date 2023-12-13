@@ -1,17 +1,28 @@
 import WebApp from "@twa-dev/sdk";
 import { Header } from "../../components/Header"
 import "./style.css"
+import { Banner } from "../../components/Banner";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export function Main() {
 
-    WebApp.setHeaderColor("#18191F");
-    WebApp.MainButton.disable();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        WebApp.MainButton.disable();
+        WebApp.BackButton.hide();
+    })
 
     return (
         <div className="main">
             <Header />
             <div className="content">
-                <h1>Comming Soon</h1>
+                <Banner
+                    title="Solo Challenge"
+                    description="Start to save coins in comfortable way. Test version avaliable now"
+                    onClick={() => navigate('/solo')}
+                />
             </div>
         </div>
     );

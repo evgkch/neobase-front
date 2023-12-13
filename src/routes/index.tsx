@@ -4,6 +4,7 @@ import { createMemoryRouter } from "react-router-dom";
 // import * as Boaring from "./Solo/Boarding/Info";
 import { Main } from "./Main";
 import { Welcome } from "./Welcome";
+import * as Solo from "./Solo";
   
 export const router = createMemoryRouter([
     {
@@ -14,6 +15,10 @@ export const router = createMemoryRouter([
     {
         path: "/main",
         element: <Main />
+    },
+    {
+        path: "/solo",
+        element: <Solo.Boarding  />
     }
 ]);
   

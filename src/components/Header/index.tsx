@@ -9,7 +9,7 @@ const Avatar = (props: { src?: string }) => {
 }
 
 const Username = (props: { name?: string }) => {
-    return <div>{props.name ?? 'Anonymus'}</div>
+    return <div>@{props.name ?? 'anonymus'}</div>
 }
 
 const User = () => (

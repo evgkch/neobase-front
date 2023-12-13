@@ -7,7 +7,8 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 export default defineConfig({
   plugins: [react(), nodePolyfills(), basicSsl()],
   build: {
-    outDir: './docs'
+    outDir: './docs',
+    target: 'esnext'
   },
   base: './'
 })
