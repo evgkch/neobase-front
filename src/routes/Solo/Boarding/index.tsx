@@ -30,7 +30,7 @@ export const Boarding = () => {
         };
         WebApp.MainButton.enable();
         WebApp.MainButton.setParams({ color: '#1946e6' });
-        WebApp.MainButton.setText('ok, go  (ノ ˘_˘)ノ');
+        WebApp.MainButton.setText('ok (ノ= ⩊ = )ノ go');
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 

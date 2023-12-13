@@ -3,7 +3,7 @@ import "./style.css"
 interface Props {
     title: string,
     description: string,
-    go: () => void
+    go: () => void,
 }
 
 export function Banner(props: Props) {
@@ -11,7 +11,7 @@ export function Banner(props: Props) {
         <div className="banner">
             <h2>{props.title}</h2>
             <p>{props.description}</p>
-            <button onClick={props.go}>Go</button>
+            <button onClick={props.go}>ok (ノ ˘_˘)ノ go</button>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import "./style.css"
 
 const Avatar = (props: { src?: string }) => {
     return props.src
-        ? <img className='avatar' src={props.src} alt='Avatar' />
+        ? <img className='avatar' src={props.src} alt='٩(◕‿◕)۶' />
         : <div className='avatar'></div>
 }
 

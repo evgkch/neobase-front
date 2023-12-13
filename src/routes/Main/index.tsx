@@ -46,10 +46,11 @@ function Balance() {
 
     return (
         <div className="total-balance">
-            <p>Total balance</p>
+            <div>Total balance</div>
             <div className="total-balance-value">
                 <div className={loaded ? '' : 'loading'}>{loaded ? '0' : ''}</div>
                 <div>TON</div>
+                <div className="status">{loaded ? "	(╥_╥)" : "(⌐■_■)"}</div>
             </div>
         </div>
     )
