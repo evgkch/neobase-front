@@ -46,6 +46,108 @@
     content: '🚀    ';
 }
 
+.setting {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid;
+    border-radius: 16px;
+    text-align: left;
+    margin-top: 16px;
+    padding: 16px;
+}
+
+.setting-green {
+    background-color: var(--green-color-0);
+    border-color: var(--green-color-0);
+    justify-content: end;align-items: end;
+    color: var(--green-color-2)
+}
+
+.setting-pink {
+    background-color: var(--pink-color-0);
+    border-color: var(--pink-color-0);
+}
+
+.setting-yellow {
+    background-color: var(--yellow-color-1);
+    border-color: var(--yellow-color-1);
+    color: var(--black-color-0)
+}
+
+.setting-green .status {
+    color: var(--green-color-1);
+}
+
+.setting-yellow .status {
+    color: var(--red-color-0) !important;
+}
+
+.setting input {
+    /* padding-top: 2px; */
+    border-radius: 16px;
+    margin-right: 8px;
+    border: none;
+    font-weight: 800;
+    background-color: inherit;
+    color: var(--black-color-0);
+    font-size: 24px;
+    box-sizing: border-box;
+    text-align: right;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.setting .status {
+    color: var(--green-color-2);
+    font-size: 16px;
+    font-weight: 800;
+    border-radius: 16px;
+}
+
+.setting .options {
+    display: flex;
+    font-weight: 800;
+    font-size: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.setting .option {
+    margin: 0 16px 0 0;
+    border: solid 2px var(--yellow-color-1);
+    border-radius: 16px;
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+.setting .option:hover, .setting .option-selected {
+    border-color: var(--black-color-0);
+    background-color: var(--black-color-0);
+    color: var(--yellow-color-1)
+}
+
+input:focus {
+    outline: none;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield; /* Firefox */
+}
+
 /* HTML: <div class="loader"></div> */
 /* HTML: <div class="loader"></div> */
 .loading {

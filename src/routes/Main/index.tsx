@@ -18,7 +18,7 @@ export function Main() {
 
     const onSoloClick = () => wallet
         ? navigate('/solo')
-        : WebApp.showPopup({ title: '(シ_ _)シ', message: `Connect Wallet!` });
+        : WebApp.showPopup({ title: '(シ_ _)シ', message: `Please, connect Wallet!` });
 
     return (
         <div className="main">
@@ -50,7 +50,7 @@ function Balance() {
             <div className="total-balance-value">
                 <div className={loaded ? '' : 'loading'}>{loaded ? '0' : ''}</div>
                 <div>TON</div>
-                <div className="status">{loaded ? "	(╥_╥)" : "(⌐■_■)"}</div>
+                <div className="status">{loaded ? "	(个_个)" : "(⌐■_■)"}</div>
             </div>
         </div>
     )
