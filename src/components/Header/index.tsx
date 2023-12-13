@@ -23,7 +23,7 @@ export const Header = () => {
     return (
         <header>
             <User />
-            <TonConnectButton />
+            <TonConnectButton className='connect-wallet-button' />
         </header>
     );
   };

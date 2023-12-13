@@ -25,14 +25,16 @@ export const Boarding = () => {
         WebApp.BackButton.show();
         WebApp.BackButton.onClick(back);
 
-        const next = () => {};
+        const next = () => {
+            
+        };
         WebApp.MainButton.enable();
         WebApp.MainButton.setParams({ color: '#1946e6' });
         WebApp.MainButton.setText('Next');
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 
-        const contract = SoloMaster.createFromAddress(Address.parse('EQAQAbNnGehjsJbDXTyX_vO8UzIz37jNwTDRaE829kmICjoT'));
+        const contract = SoloMaster.createFromAddress(Address.parse(import.meta.env.VITE_SOLO_MASTER_TEST_ADDRESS));
         const api = client.open(contract);
         Promise
             .all([api.getAccountCounter(), api.getMyBalance()])

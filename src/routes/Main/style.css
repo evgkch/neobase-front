@@ -6,3 +6,34 @@
     flex-direction: column;
     background-color: var(--black-color-0);
 }
+
+.total-balance {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--black-color-4);
+    border: 2px solid;
+    border-radius: 16px;
+    padding: 16px;
+    color: var(--black-color-0);
+    text-align: left;
+    margin: 16px 16px 0 16px;
+    justify-content: center;
+}
+
+.total-balance-value {
+    display: flex;
+    font-weight: 800;
+    font-size: 24px;
+    align-items: center;
+}
+
+.total-balance-value div:first-child {
+    margin-right: 8px;
+    width: 24px;
+    justify-content: center;
+    display: flex;
+}
+
+.total-balance-value .loading {
+    height: 24px;
+}
