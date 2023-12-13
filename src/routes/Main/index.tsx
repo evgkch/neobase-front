@@ -4,15 +4,21 @@ import "./style.css"
 import { Banner } from "../../components/Banner";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTonWallet } from "@tonconnect/ui-react";
 
 export function Main() {
 
+    const wallet = useTonWallet();
     const navigate = useNavigate();
 
     useEffect(() => {
         WebApp.MainButton.hide();
         WebApp.BackButton.hide();
     })
+
+    const onSoloClick = () => wallet
+        ? navigate('/solo')
+        : WebApp.showPopup({ title: 'Tip', message: 'Connect Wallet first' });
 
     return (
         <div className="main">
@@ -22,7 +28,7 @@ export function Main() {
                 <Banner
                     title="Solo Challenge"
                     description="Start to save coins in comfortable way. Test version avaliable now"
-                    onClick={() => navigate('/solo')}
+                    onClick={onSoloClick}
                 />
             </div>
         </div>
