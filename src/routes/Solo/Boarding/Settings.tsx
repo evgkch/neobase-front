@@ -58,7 +58,7 @@ export const Settings = () => {
 
         const next = () => {};
         WebApp.MainButton.enable();
-        WebApp.MainButton.setParams({ color: '#18191F' });
+        WebApp.headerColor ='#18191F';
         WebApp.MainButton.setText('check (¬‿¬ )');
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
