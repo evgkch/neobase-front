@@ -8,7 +8,7 @@ import { ReactElement, ReactNode, useEffect, useState } from "react"
 import client from "../../../controllers/client"
 import { Address, fromNano } from "ton-core"
 
-interface Props {
+interface State {
     loaded: boolean,
     accountCounter?: string,
     fundBalance?: string
@@ -17,7 +17,7 @@ interface Props {
 export const Boarding = () => {
 
     const navigate = useNavigate();
-    const [state, setState] = useState({ loaded: false } as Props);
+    const [state, setState] = useState({ loaded: false } as State);
 
     useEffect(() => {
 
@@ -30,6 +30,7 @@ export const Boarding = () => {
         WebApp.MainButton.setParams({ color: '#1946e6' });
         WebApp.MainButton.setText('Next');
         WebApp.MainButton.onClick(next);
+        WebApp.MainButton.show();
 
         const contract = SoloMaster.createFromAddress(Address.parse('EQAQAbNnGehjsJbDXTyX_vO8UzIz37jNwTDRaE829kmICjoT'));
         const api = client.open(contract);

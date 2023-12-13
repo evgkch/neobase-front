@@ -10,7 +10,7 @@ export function Main() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        WebApp.MainButton.disable();
+        WebApp.MainButton.hide();
         WebApp.BackButton.hide();
     })
 
