@@ -18,7 +18,7 @@ export function Main() {
 
     const onSoloClick = () => wallet
         ? navigate('/solo')
-        : WebApp.showPopup({ title: 'Tip', message: 'Connect Wallet first' });
+        : WebApp.showPopup({ title: 'Tip', message: 'Connect Wallet first!' });
 
     return (
         <div className="main">
@@ -26,9 +26,9 @@ export function Main() {
             <div className="content">
                 <Balance />
                 <Banner
-                    title="Solo Challenge"
+                    title="🥹 Solo Challenge #1"
                     description="Start to save coins in comfortable way. Test version avaliable now"
-                    onClick={onSoloClick}
+                    go={onSoloClick}
                 />
             </div>
         </div>

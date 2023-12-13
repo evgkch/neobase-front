@@ -84,12 +84,12 @@ function SoloStatistics(props: { children: ReactElement<typeof StatisticsItem>[]
 
 function Guide() {
     return (
-        <ul className="guide">
+        <ol className="guide">
             <li>Set Target Amount</li>
             <li>Choose Risk</li>
             <li>Create Hero</li>
             <li>Start to safe in comfortable way</li>
             <li>Get dNFT in the end to your wallet and start to receive dividends</li>
-        </ul>
+        </ol>
     )
 }
