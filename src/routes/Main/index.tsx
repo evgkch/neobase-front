@@ -18,7 +18,7 @@ export function Main() {
 
     const onSoloClick = () => wallet
         ? navigate('/solo')
-        : WebApp.showPopup({ title: 'Tip', message: 'Connect Wallet first!' });
+        : WebApp.showPopup({ title: '(シ_ _)シ', message: `Connect Wallet!` });
 
     return (
         <div className="main">
