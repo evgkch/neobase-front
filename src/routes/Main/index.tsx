@@ -12,6 +12,7 @@ export function Main() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        WebApp.setHeaderColor("#1946e6");
         WebApp.MainButton.hide();
         WebApp.BackButton.hide();
     })
