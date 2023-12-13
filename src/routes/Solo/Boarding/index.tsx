@@ -30,7 +30,7 @@ export const Boarding = () => {
         };
         WebApp.MainButton.enable();
         WebApp.MainButton.setParams({ color: '#1946e6' });
-        WebApp.MainButton.setText('Next');
+        WebApp.MainButton.setText('Next (ノ ˘_˘)ノ');
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 
@@ -54,7 +54,7 @@ export const Boarding = () => {
     
     return (
         <div className="boarding">
-            <h2>Solo start</h2>
+            <h2>🚀 Solo start</h2>
             <p>You don’t think you should login first and behave like human not robot.</p>
             <SoloStatistics>
                 <StatisticsItem value={state.accountCounter}>accounts</StatisticsItem>
