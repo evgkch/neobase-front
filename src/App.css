@@ -175,6 +175,7 @@ button {
   color: inherit;
   user-select: none;
   outline: none;
+  background-color: white;
 }
 
 /* White Button */

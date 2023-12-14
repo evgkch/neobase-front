@@ -8,6 +8,7 @@ import { ReactNode, useEffect, useState } from "react"
 import client from "../../../controllers/client"
 import { Address, fromNano } from "ton-core"
 import { Animations } from "../../../components/Loader/Loader"
+import { Colors } from "../../../helpers/colors"
 
 interface State {
     loaded: boolean,
@@ -31,9 +32,11 @@ export const Info = () => {
         };
 
         WebApp.MainButton.enable();
-        WebApp.headerColor = '#1946e6';
+        WebApp.setHeaderColor(Colors.BLUE);
         WebApp.MainButton.setText('ok (ノ= ⩊ = )ノ go');
         WebApp.MainButton.onClick(next);
+        WebApp.MainButton.color = '#FFFFFF';
+        WebApp.MainButton.textColor = Colors.BLACK;
         WebApp.MainButton.show();
 
         const contract = SoloMaster.createFromAddress(Address.parse(import.meta.env.VITE_SOLO_MASTER_TEST_ADDRESS));

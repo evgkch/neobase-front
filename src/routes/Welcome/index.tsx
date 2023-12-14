@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 // import neobaseLogo from '/neobase.png'
 import './style.css'
 import WebApp from "@twa-dev/sdk";
+import { Colors } from "../../helpers/colors";
 //import { useEffect } from 'react';
 
 export const Welcome = () => {
 
     WebApp.expand();
-    WebApp.setHeaderColor("#1946e6");
+    WebApp.setHeaderColor(Colors.BLUE);
 
     const navigate = useNavigate();
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useTonWallet } from "@tonconnect/ui-react";
 import { Animations } from "../../components/Loader/Loader";
 import { Kaomoji } from "../../helpers";
+import { Colors } from "../../helpers/colors";
 
 export function Main() {
 
@@ -14,7 +15,7 @@ export function Main() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        WebApp.setHeaderColor("#1946e6");
+        WebApp.setHeaderColor(Colors.BLACK);
         WebApp.MainButton.hide();
         WebApp.BackButton.hide();
     })
