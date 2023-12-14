@@ -3,7 +3,7 @@ header {
     width: 100%;
     justify-content: space-between;
     padding: 16px;
-    background-color: var(--blue-color-0);
+    background-color: var(--blue-color-acid);
 }
 
 .user {
@@ -16,7 +16,7 @@ header {
     border: solid 2px white;
     width: 28px;
     height: 28px;
-    background-color: var(--blue-color-0);
+    background-color: var(--blue-color-acid);
     margin-inline: 1rem;
 }
 

@@ -4,42 +4,24 @@
     width: 100vw;
     align-items: center;
     flex-direction: column;
+    /* background-color: var(--black-color-4); */
+}
+
+.main header {
     background-color: var(--black-color-0);
 }
 
-.total-balance {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--black-color-4);
-    border: 2px solid;
-    border-radius: 16px;
-    padding: 16px;
-    color: var(--black-color-0);
-    text-align: left;
-    margin: 16px 16px 0 16px;
-    justify-content: center;
-}
-
-.total-balance-value {
-    display: flex;
+.balance .status, .balance .running-man-loading {
+    display: block;
     font-weight: 800;
-    font-size: 24px;
-    align-items: center;
 }
 
-.total-balance-value div:first-child {
-    margin-right: 8px;
-    width: 24px;
-    justify-content: center;
-    display: flex;
+.balance .value {
+    font-weight: 800;
+    font-size: 1.5em;
+    white-space:pre;
 }
 
-.total-balance-value .loading {
-    height: 24px;
-}
-
-.total-balance-value .status {
-    font-size: 16px;
-    color: var(--black-color-1);
-    margin-left: 16px;
+.balance .terminal-loading {
+    font-size: 0.9em;
 }

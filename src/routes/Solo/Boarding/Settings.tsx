@@ -1,7 +1,9 @@
-import { ReactElement, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Title } from "./Title";
 import { useNavigate } from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
+import { Kaomoji } from "../../../helpers";
+import { Animations } from "../../../components/Loader/Loader";
 
 interface State {
     heroId: number,
@@ -26,28 +28,23 @@ export const Settings = () => {
     const navigate = useNavigate();
 
     const onGoalAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number(event.target.value);
-        if (value >= 1 && value <= 10000) {
-            setState({
-                ...state,
-                goalAmount: Number(event.target.value),
-                risk: 1,
-                valid: value >= 100
-            })
-        }
-        else if (value < 1) {
-            setState({
-                ...state,
-                valid: false
-            })
-        }
+        const value = Math.floor(Number(event.target.value));
+        const isValid = value >= 1 && value <= 10000;
+
+        // TMA
+        isValid ? WebApp.MainButton.enable() : WebApp.MainButton.disable();
+
+        // Update state
+        setState({
+            ...state,
+            goalAmount: Number(event.target.value),
+            risk: 1,
+            valid: isValid
+        });
     }
 
     const handleRiskOptionClick = (risk: number) => {
-        setState({
-            ...state,
-            risk
-        })
+        setState({ ...state, risk })
     }
 
     useEffect(() => {
@@ -72,15 +69,22 @@ export const Settings = () => {
     return (
         <div className="boarding">
             <Title />
-            <Setting color="green">
-                <div>Set target</div>
-                <div className="total-balance-value">
+            <div className="setting box box-green-acid">
+                <div className="row float-near-border">
+                    {state.valid
+                        ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
+                        : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.INPUT_ERROR} />
+                    }
+                    <div>Set target</div>
+                </div>
+                <div className="row float-right description">
+                    <p>Description how to set Target Amount and will be happy</p>
+                </div>
+                <div className="value row float-right">
                     <input
                         id="goal-amount"
                         type="number"
                         step={1}
-                        min={1}
-                        max={10000}
                         pattern="\d*"
                         inputMode="numeric"
                         defaultValue={state.goalAmount}
@@ -88,11 +92,16 @@ export const Settings = () => {
                         value={state.goalAmount}
                     />
                     <div>TON</div>
-                    <div className="status">{state.valid ? "(o˘◡˘o)" : "(个_个)"}</div>
                 </div>
-            </Setting>
-            <Setting color="yellow">
-                <div>Set risk</div>
+            </div>
+            <div className="setting box box-yellow-light">
+                <div className="row float-near-border">
+                    <div>Set risk</div>
+                    {<div className="kaomoji status">{state.risk === 1 ? Kaomoji.LOVE : state.risk <= 4 ? Kaomoji.WOW : Kaomoji.DISAPPOINTMENT}</div>}
+                </div>
+                <div className="row description float-left ">
+                    <p>For example, if you widthdraw {(state.goalAmount / 10).toFixed(2)} TONs you will pay {(state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
+                </div>
                 <div className="options">
                     {Array.from({ length: numRisk2select(state.goalAmount) }, (_, i) =>
                         <div
@@ -103,19 +112,8 @@ export const Settings = () => {
                             {risk2comission(i + 1)}
                         </div>
                     )}
-                    <div className="status">{state.goalAmount === 1 ? "(｡•́︿•̀｡)" : state.risk <= 4 ? "＼(º □ º l|l)" : "┐( ˘_˘ )┌"}</div>
                 </div>
-            </Setting>
-        </div>
-    )
-}
-
-type SettingColor = 'green' | 'pink' | 'yellow';
-
-function Setting(props: { children: ReactElement[], color: SettingColor }) {
-    return (
-        <div className={`setting setting-${props.color}`}>
-            {props.children}
+            </div>
         </div>
     )
 }

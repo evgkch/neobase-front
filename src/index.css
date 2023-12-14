@@ -5,21 +5,36 @@
   --black-color-3: #9FA4B4;
   --black-color-4: #F4F5F7;
   --black-color-5: #EEEFF4;
+
   --blue-color-0: hsla(227, 80%, 50%, 1);
   --blue-color-1: hsla(230, 100%, 75%, 1);
   --blue-color-2: hsla(246, 78%, 95%, 1);
+  --blue-color-acid: hsl(225, 100%, 60%);
+
   --pink-color-0: hsla(335, 100%, 77%, 1);
   --pink-color-1: hsla(335, 100%, 89%, 1);
   --pink-color-2: hsla(335, 100%, 98%, 1);
+
   --yellow-color-0: hsla(43, 100%, 54%, 1);
   --yellow-color-1: hsla(43, 100%, 70%, 1);
   --yellow-color-2: hsla(47, 100%, 90%, 1);
+
   --green-color-0: hsla(173, 100%, 39%, 1);
   --green-color-1: hsla(166, 71%, 64%, 1);
   --green-color-2: hsla(172, 86%, 91%, 1);
+  --green-color-acid: hsl(118, 77%, 69%);
+
   --red-color-0: hsla(14, 94%, 57%, 1);
   --red-color-1: hsla(2, 100%, 79%, 1);
   --red-color-2: hsla(0, 100%, 95%, 1);
+
+  --purple-color-acid: #E374ED;
+
+  --size-xs: 4px;
+  --size-s: 8px;
+  --size-m: 16px;
+  --size-l: 24px;
+  --size-xl: 32px;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -27,7 +42,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--blue-color-0);
+  background-color: var(--blue-color-acid);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -61,26 +76,9 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-@media (prefers-color-scheme: light) {
+
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -91,4 +89,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

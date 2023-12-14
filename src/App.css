@@ -3,11 +3,350 @@
   margin: 0 auto;
   text-align: center;
   height: 100vh;
+  width: 100%;
 }
+
+/* Content is ? */
 
 .content {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;  
   width: 100%;
+}
+
+/*
+----------------------------------
+----------- (シ_ _)シ ------------
+----------------------------------
+*/
+
+.kaomoji {
+  font-size: inherit;
+  align-self: center;
+  display: inline-block;
+  font-weight: 800;
+}
+
+.revert {
+  transform: scaleX(-1);
+}
+
+button:hover .kaomoji {
+  transform: scaleX(-1);
+}
+
+/*
+----------------------------------
+----------- Direction ------------
+----------------------------------
+*/
+
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+----------------------------------
+------------- Boxes --------------
+----------------------------------
+*/
+
+.box {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-inline: 1rem;
+  margin-top: 1rem;
+  border-radius: var(--size-m);
+  color: var(--black-color-0);
+  box-shadow: 8px 8px var(--black-color-0);
+  border: solid 2px var(--black-color-0);
+}
+
+/* White Box */
+
+.box-white-dark {
+  background-color: var(--black-color-3);
+}
+
+.box-white {
+  background-color: var(--black-color-4);
+}
+
+/* Black Box */
+
+.box-black {
+  background-color: var(--black-color-0);
+}
+
+.box-black-light {
+  background-color: var(--black-color-1);
+}
+
+/* Blue Box */
+
+.box-blue {
+  background-color: var(--blue-color-acid);
+}
+
+.box-blue-light {
+  background-color: var(--blue-color-1);
+}
+
+/* Green Box */
+
+.box-green {
+  background-color: var(--green-color-0);
+}
+
+.box-green-light {
+  background-color: var(--green-color-1);
+}
+
+.box-green-acid {
+  background-color: var(--green-color-acid);
+}
+
+/* Pink Box */
+
+.box-pink {
+  background-color: var(--pink-color-0);
+}
+
+.box-pink-light {
+  background-color: var(--pink-color-1);
+}
+
+/* Yellow Box */
+
+.box-yellow {
+  background-color: var(--yellow-color-0);
+}
+
+.box-yellow-light {
+  background-color: var(--yellow-color-1);
+}
+
+/* Red Box */
+
+.box-red {
+  background-color: var(--red-color-0);
+}
+
+.box-red-light {
+  background-color: var(--red-color-1);
+}
+
+/*
+----------------------------------
+------------ Banner --------------
+----------------------------------
+*/
+
+.banner {
+  align-items: flex-start;
+}
+
+.banner button {
+  width: 100%;
+}
+
+/*
+----------------------------------
+------------ Buttons -------------
+----------------------------------
+*/
+
+button {
+  border: 2px solid;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 300ms;
+  border-radius: var(--size-xl);
+  color: inherit;
+  user-select: none;
+  outline: none;
+}
+
+/* White Button */
+
+button.button-white:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-4);
+}
+
+button.button-white, button.button-white:active {
+  color: var(--black-color-4);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/* Blue Button */
+
+button.button-blue:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--blue-color-acid);
+}
+
+button.button-blue, button.button-blue:active {
+  color: var(--blue-color-acid);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/* Green Button */
+
+button.button-green:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--green-color-0);
+}
+
+button.button-green, button.button-green:active {
+  color: var(--green-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+button.button-green-acid:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--green-color-acid);
+}
+
+button.button-green-acid, button.button-green-acid:active {
+  color: var(--green-color-acid);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/* Pink Button */
+
+button.button-pink:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--pink-color-0);
+}
+
+button.button-pink, button.button-pink:active {
+  color: var(--pink-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/* Yellow Button */
+
+button.button-yellow:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--yellow-color-0);
+}
+
+
+button.button-yellow, button.button-yellow:active {
+  color: var(--yellow-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/* Red Button */
+
+button.button-red:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--red-color-0);
+}
+
+button.button-red, button.button-red:active {
+  color: var(--red-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+/*
+----------------------------------
+------------ Inputs --------------
+----------------------------------
+*/
+
+input {
+  border-radius: var(--size-m);
+  border: none;
+  font-weight: 800;
+  background-color: inherit;
+  color: var(--black-color-0);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/*
+----------------------------------
+------------- Lists --------------
+----------------------------------
+*/
+
+ol {
+  list-style-type: hiragana;
+}
+
+/*
+----------------------------------
+------------- Float --------------
+----------------------------------
+*/
+
+.float-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.float-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.float-near-border {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.float-center {
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+/*
+----------------------------------
+----------- Validation -----------
+----------------------------------
+*/
+
+.invalid {
+  color: var(--purple-color-acid);
 }

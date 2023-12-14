@@ -5,6 +5,8 @@ import { Banner } from "../../components/Banner";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTonWallet } from "@tonconnect/ui-react";
+import { Animations } from "../../components/Loader/Loader";
+import { Kaomoji } from "../../helpers";
 
 export function Main() {
 
@@ -30,6 +32,7 @@ export function Main() {
                     title="🥹 Solo Challenge #1"
                     description="Start to save coins in comfortable way. Test version avaliable now"
                     go={onSoloClick}
+                    color="green-acid"
                 />
             </div>
         </div>
@@ -46,12 +49,20 @@ function Balance() {
     })
 
     return (
-        <div className="total-balance">
-            <div>Total balance</div>
-            <div className="total-balance-value">
-                <div className={loaded ? '' : 'loading'}>{loaded ? '0' : ''}</div>
-                <div>TON</div>
-                <div className="status">{loaded ? "	(个_个)" : "(⌐■_■)"}</div>
+        <div className="balance box box-white float-left">
+            <div className="row float-near-border">
+                <div>Total balance</div>
+                {loaded
+                    ? <div className="kaomoji status">{Kaomoji.CRYING}</div>
+                    : <Animations.RunnigMan />
+                }
+            </div>
+            <div className="value row float-left">
+                {loaded
+                    ? <div>0</div>
+                    : <Animations.Terminal />
+                }
+                <div> TON</div>
             </div>
         </div>
     )

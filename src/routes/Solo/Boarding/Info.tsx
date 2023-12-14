@@ -4,9 +4,10 @@ import { SoloMaster } from "neobase/wrappers/SoloMaster"
 
 import "./style.css"
 import { useNavigate } from "react-router-dom"
-import { ReactElement, ReactNode, useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import client from "../../../controllers/client"
 import { Address, fromNano } from "ton-core"
+import { Animations } from "../../../components/Loader/Loader"
 
 interface State {
     loaded: boolean,
@@ -55,35 +56,30 @@ export const Info = () => {
 
     return (
         <>
-            <SoloStatistics>
-                <StatisticsItem value={state.accountCounter}>accounts</StatisticsItem>
-                <StatisticsItem value={state.fundBalance}>TON saved</StatisticsItem>
-            </SoloStatistics>
+            <div className="statistics row">
+                <Statistics value={state.accountCounter}>accounts</Statistics>
+                <Statistics value={state.fundBalance}>TON saved</Statistics>
+            </div>
             <Guide />
         </>
     )
 }
 
-function StatisticsItem(props: { value?: any, children: ReactNode }) {
+function Statistics(props: { value?: any, children: ReactNode }) {
     return (
-        <div className="statistics-item">
-            <div className={props.value ? 'loaded' : 'loading'}>{props.value}</div>
+        <div className="column float-center">
+            {props.value
+                ? <div>{props.value}</div>
+                : <Animations.Terminal />
+            }
             <div>{props.children}</div>
-        </div>
-    )
-}
-
-function SoloStatistics(props: { children: ReactElement<typeof StatisticsItem>[] }) {
-    return (
-        <div className="statistics">
-            {props.children}
         </div>
     )
 }
 
 function Guide() {
     return (
-        <ol className="guide">
+        <ol className="box box-white guide">
             <li>Set Target Amount</li>
             <li>Choose Risk</li>
             <li>Create Hero</li>

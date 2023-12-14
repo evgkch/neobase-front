@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import neobaseLogo from '/neobase.png'
+// import neobaseLogo from '/neobase.png'
 import './style.css'
 import WebApp from "@twa-dev/sdk";
 //import { useEffect } from 'react';
@@ -19,7 +19,8 @@ export const Welcome = () => {
 
     return (
         <div className='welcome'>
-            <img src={neobaseLogo} className="logo" alt="Neobase logo" />
+            <h1 className="logo">nb</h1>
+            {/* <img src={neobaseLogo} className="logo" alt="Neobase logo" /> */}
             <p>neobase</p>
         </div>
     )

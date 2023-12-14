@@ -10,17 +10,17 @@
     padding: 1.5em;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
-    animation-name: logo;
+    /* animation-name: logo; */
 }
   
-@keyframes logo {
+/* @keyframes logo {
     from {
         transform: scale(2.0);
     }
     to {
         transform: scale(1.0);
     }
-}
+} */
 
 .welcome p {
     animation-duration: 2s;
@@ -29,10 +29,6 @@
 
 @keyframes neobase {
     from {
-        opacity: 0;
-    }
-
-    50% {
         opacity: 0;
     }
 

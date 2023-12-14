@@ -1,0 +1,22 @@
+.reflecting{
+    animation: relfection-loader 500ms infinite ;
+    animation-timing-function: steps(2, jump-none);
+    user-select: none;
+}
+
+.terminal-loading {
+    animation: terminal-loader 1s infinite ;
+    animation-timing-function: steps(2, jump-none);
+    user-select: none;
+    color: var(--green-color-acid);
+}
+  
+@keyframes terminal-loader {
+    from  { opacity: 1 }
+    to    { opacity: 0 }
+}
+
+@keyframes relfection-loader {
+    from  { transform: scaleX(1) }
+    50%  { transform: scaleX(-1) }
+}
