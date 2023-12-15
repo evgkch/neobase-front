@@ -64,9 +64,9 @@ export const Target = () => {
         <div className="boarding">
             <div className="box box-white">
                 <div className="row float-near-border">
-                    <div>Set target <Animations.Terminal/></div>
+                    <b>Set target</b>
                         {state.valid
-                            ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
+                            ? <b className="kaomoji status">{Kaomoji.HAPPY}</b>
                             : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.REFLECTED.INPUT_ERROR} />
                         }
                     </div>

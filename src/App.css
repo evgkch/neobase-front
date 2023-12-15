@@ -51,6 +51,14 @@ button:hover .kaomoji {
   flex-direction: column;
 }
 
+.in-2-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0;
+  grid-auto-rows: max-content;
+}
+
+
 /*
 ----------------------------------
 ------------- Boxes --------------
@@ -355,13 +363,12 @@ ol {
   width: 100%;
 }
 
-
 /*
 ----------------------------------
 ----------- Validation -----------
 ----------------------------------
 */
 
-.invalid {
+.invalid, .error {
   color: var(--purple-color-acid);
 }

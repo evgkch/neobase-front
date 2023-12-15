@@ -7,7 +7,6 @@ import { Colors } from "../../../../helpers/colors";
 import * as model from '../../../../model';
 
 import "./style.css";
-import { Animations } from "../../../../components/Loader/Loader";
 
 interface State {
     risk: number
@@ -56,23 +55,23 @@ export const Risk = () => {
             </div>
             <div className="box box-white">
                 <div className="row float-near-border">
-                        <div>Set risk <Animations.Terminal /></div>
-                        <div className="kaomoji status">{
+                        <b>Set risk</b>
+                        <b className="kaomoji status">{
                             state.risk === 1
                                 ? Kaomoji.LOVE
                                 : state.risk <= 4
                                     ? Kaomoji.REFLECTED.WOW
                                     : Kaomoji.DISAPPOINTMENT
-                        }</div>
+                        }</b>
                 </div>
                 <div className="row description float-left ">
                     <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
                 </div>
             </div>
-            <div className="risks scroll-box">
+            <div className="in-2-columns scroll-box">
                 {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
                     <div
-                        className={`box risk ${state.risk === i + 1 ? 'box-black risk-selected' : 'box-green-acid'}`}
+                        className={`box risk ${state.risk === i + 1 ? 'box-black risk-selected' : 'box-white-acid'}`}
                         key={i}
                         onClick={() => handleRiskOptionClick(i + 1)}
                     >

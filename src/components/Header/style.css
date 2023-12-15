@@ -14,7 +14,7 @@ header {
 
 .avatar {
     color: var(--purple-color-acid);
-    animation-duration: 3s !important;
+    animation-duration: 10s !important;
     margin-right: 1rem;
 }
 

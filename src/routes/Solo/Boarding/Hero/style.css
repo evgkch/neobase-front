@@ -1,9 +1,3 @@
-.heroes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-}
-
 .hero-content {
     align-self: center;
     aspect-ratio: 1/1;
@@ -18,4 +12,8 @@
 
 .hero-selected {
     color: var(--purple-color-acid);
+}
+
+.hero-content  div {
+    animation-duration: 2s;
 }

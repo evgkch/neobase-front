@@ -9,9 +9,12 @@ import clientPromise from "../../../controllers/client"
 import { Address, fromNano } from "ton-core"
 import { Animations } from "../../../components/Loader/Loader"
 import { Colors } from "../../../helpers/colors"
+import { Kaomoji } from "../../../helpers"
+
+export type Status =  'pending' | 'loaded' | 'error';
 
 interface State {
-    loaded: boolean,
+    status: Status,
     accountCounter?: string,
     fundBalance?: string
 }
@@ -19,7 +22,7 @@ interface State {
 export const Info = () => {
 
     const navigate = useNavigate();
-    const [state, setState] = useState({ loaded: false } as State);
+    const [state, setState] = useState({ status: 'pending' } as State);
 
     useEffect(() => {
 
@@ -46,12 +49,16 @@ export const Info = () => {
                 .all([api.getAccountCounter(), api.getMyBalance()])
                 .then(res => 
                     setState({
-                        loaded: true,
+                        status: 'loaded',
                         accountCounter: Number(res[0]).toString(),
                         fundBalance: Number(fromNano(res[1])).toFixed(2)
                     })
-                );
-        }) 
+                )
+        }).catch(() => {
+            setState({
+                status: 'error'
+            })
+        });
 
         return () => {
             WebApp.BackButton.offClick(back);
@@ -62,20 +69,22 @@ export const Info = () => {
     return (
         <>
             <div className="statistics row">
-                <Statistics value={state.accountCounter}>accounts</Statistics>
-                <Statistics value={state.fundBalance}>TON saved</Statistics>
+                <Statistics value={state.accountCounter} status={state.status}>accounts</Statistics>
+                <Statistics value={state.fundBalance} status={state.status}>TON saved</Statistics>
             </div>
             <Guide />
         </>
     )
 }
 
-function Statistics(props: { value?: any, children: ReactNode }) {
+function Statistics(props: { status: Status, value?: any, children: ReactNode }) {
     return (
         <div className="column float-center">
-            {props.value
-                ? <div>{props.value}</div>
-                : <Animations.Terminal />
+            {props.status === 'pending'
+                ? <Animations.Terminal />
+                : props.status === 'loaded'
+                    ? <div>{props.value}</div>
+                    : <div className="error">{Kaomoji.ERROR}</div>
             }
             <div>{props.children}</div>
         </div>

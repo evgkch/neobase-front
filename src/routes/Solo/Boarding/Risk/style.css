@@ -1,9 +1,3 @@
-.risks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-}
-
 .risk {
     align-self: center;
     display: flex;
