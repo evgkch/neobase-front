@@ -44,6 +44,7 @@ button:hover .kaomoji {
 
 .row {
   display: flex;
+  flex-direction: row;
 }
 
 .column {
@@ -75,6 +76,7 @@ button:hover .kaomoji {
   color: var(--black-color-0);
   box-shadow: 8px 8px var(--black-color-0);
   border: solid 2px var(--black-color-0);
+  transition: transform 300ms;
 }
 
 .scroll-box {
@@ -103,10 +105,18 @@ button:hover .kaomoji {
   border-color:  var(--black-color-0);
 }
 
-.box-black-acid {
+.box-black-purple {
   background-color: var(--black-color-0);
   box-shadow: 8px 8px var(--purple-color-acid);
   border-color: var(--purple-color-acid);
+  color: var(--purple-color-acid);
+}
+
+.box-black-green {
+  background-color: var(--black-color-0);
+  box-shadow: 8px 8px var(--green-color-acid);
+  border-color: var(--green-color-acid);
+  color: var(--green-color-acid);
 }
 
 .box-black-light {

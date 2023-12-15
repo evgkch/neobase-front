@@ -35,7 +35,7 @@ export const Check = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-black-acid card">
+            <div className="box box-black-purple card">
                 <div className="row float-near-border info">
                     <h2>{model.solo.state.goalAmount} TON</h2>
                     <h2>RISK {risk2comission(model.solo.state.risk)}</h2>

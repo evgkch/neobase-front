@@ -66,7 +66,7 @@ export const Target = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-white target">
+            <div className="box box-white">
                 <div className="row float-near-border">
                     <b>Set target</b>
                         {state.valid
@@ -77,9 +77,10 @@ export const Target = () => {
                     <div className="row float-left description">
                         <p>Description how to set Target Amount and will be happy</p>
                     </div>
-                    <label className="footer value row">
+                </div>
+                <div className="box box-black-green target">
+                    <label>
                         <input
-                            id="goal-amount"
                             type="number"
                             step={1}
                             pattern="\d*"
