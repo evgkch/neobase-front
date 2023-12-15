@@ -45,11 +45,11 @@
 }
 
 .options {
-    display: flex;
     font-weight: 800;
     font-size: 2em;
-    flex-wrap: wrap;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
 }
 
 .option {
@@ -80,8 +80,6 @@ label {
 }
 
 .scroll-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 1em;
     overflow-y: scroll;
     overflow-x: hidden;

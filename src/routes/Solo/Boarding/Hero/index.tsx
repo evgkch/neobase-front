@@ -59,7 +59,7 @@ export const Hero = () => {
                     Finally, choose a Hero. Just character, nothing more!
                 </div>
             </div>
-            <div className="scroll-box">
+            <div className="scroll-box heroes">
                 {heroes.map(item =>
                     <HeroItem
                         key={item}
