@@ -61,8 +61,8 @@ button:hover .kaomoji {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  margin-inline: 0.5rem;
-  margin-top: 0.5rem;
+  margin-inline: 0.75rem;
+  margin-top: 0.75rem;
   border-radius: var(--size-m);
   color: var(--black-color-0);
   box-shadow: 8px 8px var(--black-color-0);
