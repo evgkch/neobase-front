@@ -21,8 +21,8 @@
 .target:has(input:focus) {
     background-color: var(--green-color-acid);
     border-color: var(--green-color-acid);
-    box-shadow: none;
-    transform: translate(var(--size-s), var(--size-s));
+    box-shadow: 8px 8px var(--black-color-0);
+    /* transform: translate(var(--size-s), var(--size-s)); */
     border-color: var(--black-color-0);
 }
 
