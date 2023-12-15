@@ -28,7 +28,7 @@ export const Info = () => {
         WebApp.BackButton.onClick(back);
 
         const next = () => {
-            navigate('/solo/settings');
+            navigate('/solo/target');
         };
 
         WebApp.MainButton.enable();

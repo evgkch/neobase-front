@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react"
-import { Title } from "./Title";
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
-import { Kaomoji } from "../../../helpers";
-import { Animations } from "../../../components/Loader/Loader";
+import { Kaomoji } from "../../../../helpers";
+import { Animations } from "../../../../components/Loader/Loader";
+import { Colors } from "../../../../helpers/colors";
+
+import * as model from '../../../../model';
 
 interface State {
-    heroId: number,
     goalAmount: number,
-    risk: number,
     valid: boolean
 }
 
-const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
-
-const numRisk2select = (goalAmount: number) => Math.floor(Math.log2(goalAmount));
-
-export const Settings = () => {
+export const Target = () => {
 
     const [state, setState] = useState<State>({
-        heroId: 1,
-        goalAmount: 100,
-        risk: 1,
+        goalAmount: model.solo.state.goalAmount,
         valid: true
     });
 
@@ -31,20 +25,20 @@ export const Settings = () => {
         const value = Math.floor(Number(event.target.value));
         const isValid = value >= 1 && value <= 10000;
 
-        // TMA
-        isValid ? WebApp.MainButton.enable() : WebApp.MainButton.disable();
-
         // Update state
         setState({
             ...state,
-            goalAmount: Number(event.target.value),
-            risk: 1,
+            goalAmount: value,
             valid: isValid
         });
-    }
 
-    const handleRiskOptionClick = (risk: number) => {
-        setState({ ...state, risk })
+        if (isValid) {
+            model.solo.set('goalAmount', value);
+            WebApp.MainButton.enable();
+        }
+        else {
+            WebApp.MainButton.disable()
+        }
     }
 
     useEffect(() => {
@@ -53,10 +47,10 @@ export const Settings = () => {
         WebApp.BackButton.show();
         WebApp.BackButton.onClick(back);
 
-        const next = () => {};
+        const next = () => navigate('/solo/risk');
         WebApp.MainButton.enable();
-        WebApp.headerColor ='#18191F';
-        WebApp.MainButton.setText('check (¬‿¬ )');
+        WebApp.setHeaderColor(Colors.BLUE);
+        WebApp.MainButton.setText(`ok ${Kaomoji.YEEE} next`);
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 
@@ -68,7 +62,6 @@ export const Settings = () => {
 
     return (
         <div className="boarding">
-            <Title />
             <div className="setting box box-green-acid">
                 <div className="row float-near-border">
                     {state.valid
@@ -92,26 +85,6 @@ export const Settings = () => {
                         value={state.goalAmount}
                     />
                     <div>TON</div>
-                </div>
-            </div>
-            <div className="setting box box-yellow-light">
-                <div className="row float-near-border">
-                    <div>Set risk</div>
-                    {<div className="kaomoji status">{state.risk === 1 ? Kaomoji.LOVE : state.risk <= 4 ? Kaomoji.WOW : Kaomoji.DISAPPOINTMENT}</div>}
-                </div>
-                <div className="row description float-left ">
-                    <p>For example, if you widthdraw {(state.goalAmount / 10).toFixed(2)} TONs you will pay {(state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
-                </div>
-                <div className="options">
-                    {Array.from({ length: numRisk2select(state.goalAmount) }, (_, i) =>
-                        <div
-                            className={`option ${state.risk === i + 1 ? 'option-selected' : ''}`}
-                            key={i}
-                            onClick={() => handleRiskOptionClick(i + 1)}
-                        >
-                            {risk2comission(i + 1)}
-                        </div>
-                    )}
                 </div>
             </div>
         </div>

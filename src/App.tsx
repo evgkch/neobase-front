@@ -10,7 +10,6 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { router } from "./routes";
 
 WebApp.ready();
-
 function App() {
   return (
     <>

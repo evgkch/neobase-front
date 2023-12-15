@@ -17,5 +17,7 @@ export namespace Kaomoji {
     export const SAD = "(｡•́︿•̀｡)";
 
     export const LOVE = "♡＼(￣▽￣)／♡";
-    
+
+    export const YEEE = '(ノ= ⩊ = )ノ';
+
 }

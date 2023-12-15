@@ -11,6 +11,7 @@ export const router = createMemoryRouter(createRoutesFromElements(
         <Route index path="/" element={<Welcome />} />
         <Route path="/main" element={ <Main />} />
         <Route path="/solo" element={<Solo.Boarding />} />
-        <Route path="/solo/settings" element={<Solo.Settings/ >} />
+        <Route path="/solo/target" element={<Solo.Target />} />
+        <Route path="/solo/risk" element={<Solo.Risk />} />
     </>
 ));
