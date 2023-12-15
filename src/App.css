@@ -75,6 +75,7 @@ button:hover .kaomoji {
   height: 100%;
   padding-bottom: 1em;
   margin-top: 1em;
+  scroll-snap-type: y proximity;
 }
 
 /* White Box */
