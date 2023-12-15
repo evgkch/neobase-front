@@ -38,6 +38,7 @@
 .setting .value {
     font-size: 2em;
     font-weight: 800;
+    align-items: center;
 }
 
 .setting .status {

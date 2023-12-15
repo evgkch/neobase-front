@@ -48,10 +48,19 @@ export const Risk = () => {
 
     return (
         <div className="boarding">
+            <ol className="box box-white guide">
+                <li>Target is {model.solo.state.goalAmount} TON</li>
+            </ol>
             <div className="setting box box-yellow-light">
                 <div className="row float-near-border">
                     <div>Set risk</div>
-                    {<div className="kaomoji status">{state.risk === 1 ? Kaomoji.LOVE : state.risk <= 4 ? Kaomoji.WOW : Kaomoji.DISAPPOINTMENT}</div>}
+                    <div className="kaomoji status">{
+                        state.risk === 1
+                            ? Kaomoji.LOVE
+                            : state.risk <= 4
+                                ? Kaomoji.WOW
+                                : Kaomoji.DISAPPOINTMENT
+                    }</div>
                 </div>
                 <div className="row description float-left ">
                     <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
