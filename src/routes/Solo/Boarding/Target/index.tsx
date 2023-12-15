@@ -34,10 +34,10 @@ export const Target = () => {
 
         if (isValid) {
             model.solo.set('goalAmount', value);
-            WebApp.MainButton.setParams({ is_active: true });
+            WebApp.MainButton.enable();
         }
         else {
-            WebApp.MainButton.setParams({ is_active: false });
+            WebApp.MainButton.disable();
         }
     }
 
