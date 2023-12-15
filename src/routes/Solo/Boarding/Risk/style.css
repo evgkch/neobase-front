@@ -13,12 +13,12 @@
     font-weight: 800;
     padding: var(--size-m);
     cursor: pointer;
-    align-self:first baseline;
+    align-self: first baseline;
     aspect-ratio: 3/1;
 }
 
 .risk-selected {
-    border-color: var(--black-color-0);
+    border-color: var(--purple-color-acid);
     background-color: var(--black-color-0);
     color: var(--purple-color-acid);
 }

@@ -27,7 +27,7 @@
 }
 
 .guide li::marker {
-    color: var(--black-color-2);
+    color: var(--purple-color-acid);
 }
 
 .target .description {
