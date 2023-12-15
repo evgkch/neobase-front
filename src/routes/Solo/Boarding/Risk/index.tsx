@@ -71,7 +71,7 @@ export const Risk = () => {
             <div className="risks scroll-box">
                 {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
                     <div
-                        className={`box box-yellow risk ${state.risk === i + 1 ? 'risk-selected' : ''}`}
+                        className={`box risk ${state.risk === i + 1 ? 'box-black risk-selected' : 'box-green-acid'}`}
                         key={i}
                         onClick={() => handleRiskOptionClick(i + 1)}
                     >
