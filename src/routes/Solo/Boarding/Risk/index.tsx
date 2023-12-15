@@ -6,6 +6,8 @@ import { Colors } from "../../../../helpers/colors";
 
 import * as model from '../../../../model';
 
+import "./style.css";
+
 interface State {
     risk: number
 }
@@ -46,34 +48,36 @@ export const Risk = () => {
 
     return (
         <div className="boarding">
-            <ol className="box box-white guide">
-                <li>Target is {model.solo.state.goalAmount} TON</li>
-            </ol>
-            <div className="setting box box-yellow-light scroll-box">
+            <div className="box box-white guide">
+                <ol>
+                    <li>Target is {model.solo.state.goalAmount} TON</li>
+                </ol>
+            </div>
+            <div className="box box-white">
                 <div className="row float-near-border">
-                    <div>Set risk</div>
-                    <div className="kaomoji status">{
-                        state.risk === 1
-                            ? Kaomoji.LOVE
-                            : state.risk <= 4
-                                ? Kaomoji.REFLECTED.WOW
-                                : Kaomoji.DISAPPOINTMENT
-                    }</div>
+                        <div>Set risk</div>
+                        <div className="kaomoji status">{
+                            state.risk === 1
+                                ? Kaomoji.LOVE
+                                : state.risk <= 4
+                                    ? Kaomoji.REFLECTED.WOW
+                                    : Kaomoji.DISAPPOINTMENT
+                        }</div>
                 </div>
                 <div className="row description float-left ">
                     <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
                 </div>
-                <div className="options">
-                    {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
-                        <div
-                            className={`option ${state.risk === i + 1 ? 'option-selected' : ''}`}
-                            key={i}
-                            onClick={() => handleRiskOptionClick(i + 1)}
-                        >
-                            {risk2comission(i + 1)}
-                        </div>
-                    )}
-                </div>
+            </div>
+            <div className="risks scroll-box">
+                {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
+                    <div
+                        className={`box box-yellow risk ${state.risk === i + 1 ? 'risk-selected' : ''}`}
+                        key={i}
+                        onClick={() => handleRiskOptionClick(i + 1)}
+                    >
+                        {risk2comission(i + 1)}
+                    </div>
+                )}
             </div>
         </div>
     )

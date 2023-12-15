@@ -62,17 +62,19 @@ export const Target = () => {
 
     return (
         <div className="boarding">
-            <div className="setting box box-green-acid">
+            <div className="box box-white">
                 <div className="row float-near-border">
-                    {state.valid
-                        ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
-                        : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.REFLECTED.INPUT_ERROR} />
-                    }
-                    <div>Set target</div>
+                        {state.valid
+                            ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
+                            : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.REFLECTED.INPUT_ERROR} />
+                        }
+                        <div>Set target</div>
+                    </div>
+                    <div className="row float-right description">
+                        <p>Description how to set Target Amount and will be happy</p>
+                    </div>
                 </div>
-                <div className="row float-right description">
-                    <p>Description how to set Target Amount and will be happy</p>
-                </div>
+            <div className="target box box-green-acid"> 
                 <div className="value row float-right">
                     <input
                         id="goal-amount"

@@ -50,10 +50,12 @@ export const Hero = () => {
 
     return (
         <div className="boarding">
-            <ol className="box box-white guide">
-                <li>Target is {model.solo.state.goalAmount} TON</li>
-                <li>Risk is {risk2comission(model.solo.state.risk)}</li>
-            </ol>
+            <div className="box box-white guide">
+                <ol>
+                    <li>Target is {model.solo.state.goalAmount} TON</li>
+                    <li>Risk is {risk2comission(model.solo.state.risk)}</li>
+                </ol>
+            </div>
             <div className="box box-white">
                 <div className="float-left">
                     Finally, choose a Hero. Just character, nothing more!

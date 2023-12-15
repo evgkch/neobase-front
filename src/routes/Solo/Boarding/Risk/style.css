@@ -1,0 +1,24 @@
+.risks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+.risk {
+    align-self: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: larger;
+    font-weight: 800;
+    padding: var(--size-m);
+    cursor: pointer;
+    align-self:first baseline;
+    aspect-ratio: 3/1;
+}
+
+.risk-selected {
+    border-color: var(--black-color-0);
+    background-color: var(--black-color-0);
+    color: var(--yellow-color-1);
+}

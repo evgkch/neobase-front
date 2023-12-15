@@ -82,12 +82,14 @@ function Statistics(props: { value?: any, children: ReactNode }) {
 
 function Guide() {
     return (
-        <ol className="box box-white guide">
-            <li>Set Target Amount</li>
-            <li>Choose Risk</li>
-            <li>Create Hero</li>
-            <li>Start to safe in comfortable way</li>
-            <li>Get dNFT in the end to your wallet and start to receive dividends</li>
-        </ol>
+        <div className="box box-white guide">
+            <ol>
+                <li>Set Target Amount</li>
+                <li>Choose Risk</li>
+                <li>Create Hero</li>
+                <li>Start to safe in comfortable way</li>
+                <li>Get dNFT in the end to your wallet and start to receive dividends</li>
+            </ol>
+        </div>
     )
 }
