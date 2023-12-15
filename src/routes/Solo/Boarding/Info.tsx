@@ -55,7 +55,7 @@ export const Info = () => {
             WebApp.BackButton.offClick(back);
             WebApp.MainButton.offClick(next);
         }
-    }, [state.loaded])    
+    }, [])    
 
     return (
         <>

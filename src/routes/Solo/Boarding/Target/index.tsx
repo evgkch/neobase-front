@@ -34,10 +34,10 @@ export const Target = () => {
 
         if (isValid) {
             model.solo.set('goalAmount', value);
-            WebApp.MainButton.show();
+            WebApp.MainButton.enable();
         }
         else {
-            WebApp.MainButton.hide();
+            WebApp.MainButton.disable();
         }
     }
 
@@ -58,7 +58,7 @@ export const Target = () => {
             WebApp.BackButton.offClick(back);
             WebApp.MainButton.offClick(next);
         }
-    })
+    }, [])
 
     return (
         <div className="boarding">
@@ -82,7 +82,7 @@ export const Target = () => {
                         inputMode="numeric"
                         defaultValue={state.goalAmount}
                         onChange={onGoalAmountChange}
-                        value={state.goalAmount}
+                        value={Number(state.goalAmount)}
                     />
                     <div>TON</div>
                 </div>

@@ -44,7 +44,7 @@ export const Risk = () => {
             WebApp.BackButton.offClick(back);
             WebApp.MainButton.offClick(next);
         }
-    })
+    }, [])
 
     return (
         <div className="boarding">
