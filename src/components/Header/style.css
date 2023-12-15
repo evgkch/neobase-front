@@ -9,15 +9,13 @@ header {
 .user {
     display: flex;
     align-items: center;
+    margin-left: 1em;
 }
 
 .avatar {
-    border-radius: 50%;
-    border: solid 2px white;
-    width: 28px;
-    height: 28px;
-    background-color: var(--blue-color-acid);
-    margin-inline: 1rem;
+    color: var(--purple-color-acid);
+    animation-duration: 3s !important;
+    margin-right: 1rem;
 }
 
 .connect-wallet-button button {
