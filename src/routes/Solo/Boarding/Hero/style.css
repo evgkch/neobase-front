@@ -1,0 +1,23 @@
+.heroes-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    overflow: scroll;
+    height: 100%;
+    padding-bottom: 1em;
+}
+
+.hero-content {
+    align-self: center;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: larger;
+    font-weight: 800;
+    padding: var(--size-m);
+}
+
+.heroes-box .box-black {
+    color: var(--purple-color-acid);
+}

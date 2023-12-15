@@ -10,7 +10,7 @@ interface State {
     risk: number
 }
 
-const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
+export const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
 
 const numRisk2select = (goalAmount: number) => Math.floor(Math.log2(goalAmount));
 
@@ -33,12 +33,10 @@ export const Risk = () => {
         WebApp.BackButton.show();
         WebApp.BackButton.onClick(back);
 
-        const next = () => {};
-        WebApp.MainButton.enable();
+        const next = () => navigate('/solo/hero');
         WebApp.setHeaderColor(Colors.BLUE);
-        WebApp.MainButton.setText(`ok ${Kaomoji.YEEE} next`);
+        WebApp.MainButton.setText(`ok ${Kaomoji.REFLECTED.YEEE} next`);
         WebApp.MainButton.onClick(next);
-        WebApp.MainButton.show();
 
         return () => {
             WebApp.BackButton.offClick(back);
@@ -58,7 +56,7 @@ export const Risk = () => {
                         state.risk === 1
                             ? Kaomoji.LOVE
                             : state.risk <= 4
-                                ? Kaomoji.WOW
+                                ? Kaomoji.REFLECTED.WOW
                                 : Kaomoji.DISAPPOINTMENT
                     }</div>
                 </div>

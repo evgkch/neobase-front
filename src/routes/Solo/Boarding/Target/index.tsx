@@ -50,7 +50,7 @@ export const Target = () => {
         const next = () => navigate('/solo/risk');
         WebApp.MainButton.enable();
         WebApp.setHeaderColor(Colors.BLUE);
-        WebApp.MainButton.setText(`ok ${Kaomoji.YEEE} next`);
+        WebApp.MainButton.setText(`ok ${Kaomoji.REFLECTED.YEEE} next`);
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 
@@ -66,7 +66,7 @@ export const Target = () => {
                 <div className="row float-near-border">
                     {state.valid
                         ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
-                        : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.INPUT_ERROR} />
+                        : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.REFLECTED.INPUT_ERROR} />
                     }
                     <div>Set target</div>
                 </div>

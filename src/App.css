@@ -83,6 +83,8 @@ button:hover .kaomoji {
 
 .box-black {
   background-color: var(--black-color-0);
+  box-shadow: 8px 8px var(--purple-color-acid);
+  border-color: var(--purple-color-acid);
 }
 
 .box-black-light {
@@ -141,6 +143,10 @@ button:hover .kaomoji {
 
 .box-red-light {
   background-color: var(--red-color-1);
+}
+
+.box-purple-acid {
+  background-color: var(--purple-color-acid);
 }
 
 /*

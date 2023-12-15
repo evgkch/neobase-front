@@ -1,0 +1,13 @@
+.card {
+    aspect-ratio: 1/1;
+    color: var(--purple-color-acid)
+}
+
+.card .info {
+}
+
+.card .hero {
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
