@@ -7,6 +7,7 @@ import { Colors } from "../../../../helpers/colors";
 import * as model from '../../../../model';
 
 import "./style.css"
+import { Animations } from "../../../../components/Loader/Loader";
 
 const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
 
@@ -58,9 +59,7 @@ export const Hero = () => {
             </div>
             <div className="box box-white">
                 <div className="row float-near-border">
-                    <b>Choose Hero</b>
-                </div>
-                <div className="row float-near-border">
+                    <div>Choose Hero <Animations.Terminal /></div>
                     <div>Just character, nothing more!</div>
                 </div>
             </div>
@@ -80,7 +79,7 @@ export const Hero = () => {
 
 export function HeroItem(props: { content: string, children?: ReactNode, selected: boolean, select: () => void }) {
     return (
-        <div className={`box ${props.selected ? 'box-black hero-selected' : 'box-green-acid'} hero-content`} onClick={props.select}>
+        <div className={`box ${props.selected ? 'box-green-acid hero-selected' : 'box-black'} hero-content`} onClick={props.select}>
             <div className="reflecting">{props.content}</div>
             {props.children}
         </div>

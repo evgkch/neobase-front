@@ -67,17 +67,19 @@ export const Risk = () => {
                 <div className="row description float-left ">
                     <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
                 </div>
-            </div>
-            <div className="in-2-columns scroll-box">
-                {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
-                    <div
-                        className={`box risk ${state.risk === i + 1 ? 'box-black risk-selected' : 'box-green-acid'}`}
-                        key={i}
-                        onClick={() => handleRiskOptionClick(i + 1)}
-                    >
-                        {risk2comission(i + 1)}
+                <div className="footer risks">
+                    <div className="in-2-columns scroll-box">
+                        {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
+                            <div
+                                className={`box risk ${state.risk === i + 1 ? 'box-green-acid risk-selected' : 'box-black'}`}
+                                key={i}
+                                onClick={() => handleRiskOptionClick(i + 1)}
+                            >
+                                {risk2comission(i + 1)}
+                            </div>
+                        )}
                     </div>
-                )}
+                </div>
             </div>
         </div>
     )

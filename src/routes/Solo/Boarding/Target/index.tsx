@@ -25,6 +25,7 @@ export const Target = () => {
 
     const onGoalAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = Math.floor(Number(event.target.value));
+        
         const isValid = value >= 1 && value <= 10000;
 
         // Update state
@@ -61,10 +62,11 @@ export const Target = () => {
             WebApp.MainButton.offClick(next);
         }
     }, [])
+    
 
     return (
         <div className="boarding">
-            <div className="box box-white">
+            <div className="box box-white target">
                 <div className="row float-near-border">
                     <b>Set target</b>
                         {state.valid
@@ -75,22 +77,21 @@ export const Target = () => {
                     <div className="row float-left description">
                         <p>Description how to set Target Amount and will be happy</p>
                     </div>
+                    <label className="footer value row">
+                        <input
+                            id="goal-amount"
+                            type="number"
+                            step={1}
+                            pattern="\d*"
+                            inputMode="numeric"
+                            // defaultValue={state.goalAmount}
+                            onChange={onGoalAmountChange}
+                            value={'' + state.goalAmount}
+                            style={{ width: ('1' + state.goalAmount).length + 'ch' }}
+                        />
+                        <div>TON <Animations.Terminal /></div>
+                    </label>
                 </div>
-            <div className="target box box-green-acid"> 
-                <label className="value row float-right">
-                    <input
-                        id="goal-amount"
-                        type="number"
-                        step={1}
-                        pattern="\d*"
-                        inputMode="numeric"
-                        defaultValue={state.goalAmount}
-                        onChange={onGoalAmountChange}
-                        value={Number(state.goalAmount)}
-                    />
-                    <div>TON</div>
-                </label>
-            </div>
         </div>
     )
 }

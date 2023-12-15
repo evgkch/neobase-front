@@ -1,3 +1,11 @@
+.risks {
+    background-color: var(--green-color-acid);
+}
+
+.risks .scroll-box {
+    grid-gap: 1em;
+}
+
 .risk {
     align-self: center;
     display: flex;
@@ -5,14 +13,19 @@
     align-items: center;
     font-size: larger;
     font-weight: 800;
-    padding: var(--size-m);
+    /* padding: var(--size-m); */
     cursor: pointer;
     align-self: first baseline;
     border-radius: var(--size-xl);
+    box-shadow: none;
+    border-color: var(--black-color-0);
+    color: var(--green-color-acid);
+    margin: 0;
 }
 
 .risk-selected {
-    border-color: var(--purple-color-acid);
-    background-color: var(--black-color-0);
-    color: var(--purple-color-acid);
+    border-color: var(--black-color-0);
+    background-color: var(--green-color-acid);
+    color: var(--black-color-0);
+    /* box-shadow: -8px 8px var(--black-color-0); */
 }

@@ -21,37 +21,8 @@
     box-shadow: 8px 8px var(--green-color-acid) !important;
 }
 
-#goal-amount {
-    text-align: right;
-    margin-right: 8px;
-}
-
 .guide li::marker {
     color: var(--purple-color-acid);
-}
-
-.target .description {
-    font-size: 1.2em;
-}
-
-.target .value {
-    font-size: 2em;
-    font-weight: 800;
-    align-items: center;
-}
-
-.target .status {
-    font-weight: 800;
-}
-
-input:focus, .target:has(input:focus) div {
-    color: var(--purple-color-acid);
-}
-
-.target:has(input:focus) {
-    background-color: var(--black-color-0);
-    border-color: var(--purple-color-acid);
-    box-shadow: 8px 8px var(--purple-color-acid) !important;
 }
 
 .options {
@@ -60,10 +31,6 @@ input:focus, .target:has(input:focus) div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.5em;
-}
-
-input:focus {
-    outline: none;
 }
 
 label {

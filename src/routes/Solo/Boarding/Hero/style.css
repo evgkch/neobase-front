@@ -9,10 +9,11 @@
     padding: var(--size-m);
     cursor: pointer;
     border-radius: var(--size-xl);
+    color: var(--green-color-acid);
 }
 
 .hero-selected {
-    color: var(--purple-color-acid);
+    color: var(--black-color-0);
 }
 
 .hero-content  div {

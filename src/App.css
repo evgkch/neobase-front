@@ -82,7 +82,7 @@ button:hover .kaomoji {
   overflow-x: hidden;
   height: 100%;
   padding-bottom: 1em;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory;/* do not set template columns and rows */
 }
 
 /* White Box */
@@ -98,6 +98,12 @@ button:hover .kaomoji {
 /* Black Box */
 
 .box-black {
+  background-color: var(--black-color-0);
+  box-shadow: 8px 8px  var(--black-color-0);
+  border-color:  var(--black-color-0);
+}
+
+.box-black-acid {
   background-color: var(--black-color-0);
   box-shadow: 8px 8px var(--purple-color-acid);
   border-color: var(--purple-color-acid);
@@ -163,6 +169,23 @@ button:hover .kaomoji {
 
 .box-purple-acid {
   background-color: var(--purple-color-acid);
+}
+
+/*
+----------------------------------
+------------- Foter --------------
+----------------------------------
+*/
+
+.footer {
+  padding: 1rem;
+  margin-bottom: calc(-1rem - 2px);
+  margin-inline: calc(-1rem - 2px);
+  border-bottom-left-radius: var(--size-m);
+  border-bottom-right-radius: var(--size-m);
+  color: var(--black-color-0);
+  border: solid 2px var(--black-color-0);
+  
 }
 
 /*
@@ -322,9 +345,10 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
-    appearance: textfield;
-    -moz-appearance: textfield; /* Firefox */
+
+
+imput:focus {
+  outline: none;
 }
 
 /*
