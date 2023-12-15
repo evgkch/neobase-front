@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     height: 100%;
     padding-bottom: 1em;
 }
