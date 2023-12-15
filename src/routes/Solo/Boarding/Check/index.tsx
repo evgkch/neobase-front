@@ -23,7 +23,7 @@ export const Check = () => {
         const next = () => {};
         WebApp.MainButton.enable();
         WebApp.setHeaderColor(Colors.BLUE);
-        WebApp.MainButton.setText(`ok ${Kaomoji.REFLECTED.YEEE} start`);
+        WebApp.MainButton.setText(`do ${Kaomoji.REFLECTED.MAGIC} magic`);
         WebApp.MainButton.onClick(next);
         WebApp.MainButton.show();
 

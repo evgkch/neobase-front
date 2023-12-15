@@ -42,6 +42,8 @@ export namespace Kaomoji {
 
         export const SUNGLASSES = '(⌐■_■)';
 
+        export const MAGIC = '(o_ _)ﾉ彡☆';
+
     }
 
 }
