@@ -7,6 +7,8 @@ import { Colors } from "../../../../helpers/colors";
 
 import * as model from '../../../../model';
 
+import "./style.css"
+
 interface State {
     goalAmount: number,
     valid: boolean

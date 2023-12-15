@@ -8,6 +8,7 @@
     padding: var(--size-m);
     cursor: pointer;
     align-self: first baseline;
+    border-radius: var(--size-xl);
 }
 
 .risk-selected {

@@ -8,6 +8,7 @@
     font-weight: 800;
     padding: var(--size-m);
     cursor: pointer;
+    border-radius: var(--size-xl);
 }
 
 .hero-selected {
