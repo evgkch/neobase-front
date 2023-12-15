@@ -4,6 +4,17 @@
     height: 100vh;
 }
 
+.scroll-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    padding-bottom: 1em;
+    margin-top: 1em;
+}
+
 .statistics div div:first-child {
     font-weight: 800;
     font-size: 1.2em;

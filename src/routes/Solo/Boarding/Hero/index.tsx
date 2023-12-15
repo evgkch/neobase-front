@@ -54,7 +54,12 @@ export const Hero = () => {
                 <li>Target is {model.solo.state.goalAmount} TON</li>
                 <li>Risk is {risk2comission(model.solo.state.risk)}</li>
             </ol>
-            <div className="heroes-box">
+            <div className="box box-white">
+                <div className="float-left">
+                    Finally, choose a Hero. Just character, nothing more!
+                </div>
+            </div>
+            <div className="scroll-box">
                 {heroes.map(item =>
                     <HeroItem
                         key={item}
@@ -70,7 +75,7 @@ export const Hero = () => {
 
 export function HeroItem(props: { content: string, children?: ReactNode, selected: boolean, select: () => void }) {
     return (
-        <div className={`box ${props.selected ? 'box-black' : 'box-green-acid'} hero-content`} onClick={props.select}>
+        <div className={`box ${props.selected ? 'box-black hero-selected' : 'box-green-acid'} hero-content`} onClick={props.select}>
             <div className="reflecting">{props.content}</div>
             {props.children}
         </div>

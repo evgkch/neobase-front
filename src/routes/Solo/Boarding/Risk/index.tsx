@@ -63,7 +63,7 @@ export const Risk = () => {
                 <div className="row description float-left ">
                     <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
                 </div>
-                <div className="options">
+                <div className="options scroll-box">
                     {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
                         <div
                             className={`option ${state.risk === i + 1 ? 'option-selected' : ''}`}

@@ -38,7 +38,7 @@ export const Check = () => {
             <div className="box box-black card">
                 <div className="row float-near-border info">
                     <h2>{model.solo.state.goalAmount} TON</h2>
-                    <h2>{risk2comission(model.solo.state.risk)} RISK</h2>
+                    <h2>RISK {risk2comission(model.solo.state.risk)}</h2>
                 </div>
                 <div className="row float-near-border hero">
                     <h1 className="reflecting">{model.solo.state.hero}</h1>
