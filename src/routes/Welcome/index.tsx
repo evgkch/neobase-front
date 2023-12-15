@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './style.css'
 import WebApp from "@twa-dev/sdk";
 import { Colors } from "../../helpers/colors";
+import { Animations } from "../../components/Loader/Loader";
 //import { useEffect } from 'react';
 
 export const Welcome = () => {
@@ -20,7 +21,7 @@ export const Welcome = () => {
 
     return (
         <div className='welcome'>
-            <h1 className="logo">nb</h1>
+            <h1 className="logo">nb <Animations.Terminal/> </h1>
             {/* <img src={neobaseLogo} className="logo" alt="Neobase logo" /> */}
             <p>neobase</p>
         </div>

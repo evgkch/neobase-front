@@ -7,6 +7,7 @@ import { Colors } from "../../../../helpers/colors";
 import * as model from '../../../../model';
 
 import "./style.css";
+import { Animations } from "../../../../components/Loader/Loader";
 
 interface State {
     risk: number
@@ -55,7 +56,7 @@ export const Risk = () => {
             </div>
             <div className="box box-white">
                 <div className="row float-near-border">
-                        <div>Set risk</div>
+                        <div>Set risk <Animations.Terminal /></div>
                         <div className="kaomoji status">{
                             state.risk === 1
                                 ? Kaomoji.LOVE

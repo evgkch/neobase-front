@@ -64,18 +64,18 @@ export const Target = () => {
         <div className="boarding">
             <div className="box box-white">
                 <div className="row float-near-border">
+                    <div>Set target <Animations.Terminal/></div>
                         {state.valid
                             ? <div className="kaomoji status">{Kaomoji.HAPPY}</div>
                             : <Animations.ReflectingKaomoji class="invalid" content={Kaomoji.REFLECTED.INPUT_ERROR} />
                         }
-                        <div>Set target</div>
                     </div>
-                    <div className="row float-right description">
+                    <div className="row float-left description">
                         <p>Description how to set Target Amount and will be happy</p>
                     </div>
                 </div>
             <div className="target box box-green-acid"> 
-                <div className="value row float-right">
+                <label className="value row float-right">
                     <input
                         id="goal-amount"
                         type="number"
@@ -87,7 +87,7 @@ export const Target = () => {
                         value={Number(state.goalAmount)}
                     />
                     <div>TON</div>
-                </div>
+                </label>
             </div>
         </div>
     )
