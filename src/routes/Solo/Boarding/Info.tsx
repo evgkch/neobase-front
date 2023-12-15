@@ -5,7 +5,7 @@ import { SoloMaster } from "neobase/wrappers/SoloMaster"
 import "./style.css"
 import { useNavigate } from "react-router-dom"
 import { ReactNode, useEffect, useState } from "react"
-import client from "../../../controllers/client"
+import clientPromise from "../../../controllers/client"
 import { Address, fromNano } from "ton-core"
 import { Animations } from "../../../components/Loader/Loader"
 import { Colors } from "../../../helpers/colors"
@@ -40,16 +40,18 @@ export const Info = () => {
         WebApp.MainButton.show();
 
         const contract = SoloMaster.createFromAddress(Address.parse(import.meta.env.VITE_SOLO_MASTER_TEST_ADDRESS));
-        const api = client.open(contract);
-        Promise
-            .all([api.getAccountCounter(), api.getMyBalance()])
-            .then(res => 
-                setState({
-                    loaded: true,
-                    accountCounter: Number(res[0]).toString(),
-                    fundBalance: Number(fromNano(res[1])).toFixed(2)
-                })
-            );
+        clientPromise.then(client => {
+            const api = client.open(contract);
+            Promise
+                .all([api.getAccountCounter(), api.getMyBalance()])
+                .then(res => 
+                    setState({
+                        loaded: true,
+                        accountCounter: Number(res[0]).toString(),
+                        fundBalance: Number(fromNano(res[1])).toFixed(2)
+                    })
+                );
+        }) 
 
         return () => {
             WebApp.BackButton.offClick(back);

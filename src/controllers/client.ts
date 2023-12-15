@@ -4,10 +4,8 @@ import { TonClient } from "ton";
 // TODO
 // use as provideer
 
-const client = new TonClient({
-    endpoint: await getHttpEndpoint({
-        network: "testnet"
-    })
-});
+const clientPromise = getHttpEndpoint({
+    network: "testnet"
+}).then(endpoint => new TonClient({ endpoint }));
 
-export default client;
+export default clientPromise;
