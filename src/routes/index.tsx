@@ -15,5 +15,6 @@ export const router = createMemoryRouter(createRoutesFromElements(
         <Route key="risk" path="/solo/risk" element={<Solo.Risk />} />
         <Route key="hero" path="/solo/hero" element={<Solo.Hero />} />
         <Route key="check" path="/solo/check" element={<Solo.Check />} /> 
+        <Route key="check" path="/solo/account" element={<Solo.Account />} /> 
     </>
 ));
