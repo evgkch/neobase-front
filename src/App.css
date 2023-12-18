@@ -337,7 +337,7 @@ h2 {
   justify-content: center;
   display: flex;
   color: var(--green-color-acid);
-  border: solid 1px var(--green-color-acid)
+  /* border: solid 1px var(--green-color-acid) */
   /* align-content: stretch !important;  
   align-self: stretch !important; */
 }

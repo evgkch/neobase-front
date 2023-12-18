@@ -78,7 +78,7 @@ export const Target = () => {
                     </div>
                 </div>
                 <div className="box box-black bordered bordered-black shadowed-green target">
-                    <label className="float-right ">
+                    <label className="float-right row">
                         <input
                             type="number"
                             step={1}
@@ -88,7 +88,7 @@ export const Target = () => {
                             onChange={onGoalAmountChange}
                             value={'' + state.goalAmount}
                         />
-                        <div>TON <Animations.Terminal /></div>
+                        <div>TON  <Animations.Terminal /></div>
                     </label>
                 </div>
         </div>

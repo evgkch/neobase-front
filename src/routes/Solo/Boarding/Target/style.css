@@ -13,6 +13,10 @@
     background-color: inherit;
 }
 
+.target input {
+    margin-right: var(--size-s);
+}
+
 .target, .target input {
     color: var(--green-color-acid);
     text-align: right;

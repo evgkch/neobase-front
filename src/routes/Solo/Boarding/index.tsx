@@ -1,7 +1,6 @@
 import "./style.css"
 import { Info } from './Info'
 import { Title } from "./Title"
-import { Story } from "../../../components/Story";
 import { useNavigate } from "react-router-dom";
 export { Target } from './Target';
 export { Risk } from './Risk';
@@ -16,32 +15,6 @@ export const Boarding = () => {
         <div className="boarding">
             <Title />
             <Info />
-            <div className="scroll-box-x row stories">
-                <section>
-                    <Story title="What is Solo? " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="How starts to receive devidens? " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="What is Grade?" go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="More about Grade system " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="A story will be there " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="A story will be there " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="A story will be there " go={() => {}}/>
-                </section>
-                <section>
-                    <Story title="A story will be there " go={() => {}}/>
-                </section>
-            </div>
             <Guide />
             {import.meta.env.DEV && <button className="button-green-acid" onClick={next}>Next</button>}
         </div>

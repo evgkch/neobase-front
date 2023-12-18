@@ -43,7 +43,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(to bottom right, var(--blue-color-acid), var(--purple-color-acid));
+  background: linear-gradient(150deg, var(--blue-color-acid), var(--purple-color-acid));
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
