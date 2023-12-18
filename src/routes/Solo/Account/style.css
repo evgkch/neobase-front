@@ -1,0 +1,56 @@
+.account {
+    
+}
+
+.account .info {
+    background-color: var(--blue-color-acid);
+    border-bottom-left-radius: var(--size-xl);
+    border-bottom-right-radius: var(--size-xl);
+    background-color: var(--black-color-0);
+    padding: var(--size-m);
+}
+
+.info .value {
+    color: white;
+}
+
+.info .value div:first-child {
+    font-weight: 800;
+    font-size: x-large;
+}
+
+.progress-bar {
+    display: flex;
+    background-color:black;
+    height: 40px;
+    width: 50%;
+    align-self: center;
+    position: relative;
+}
+
+.progress-bar .progress {
+    background-color: var(--green-color-acid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.info h2 {
+    color: var(--green-color-acid)
+}
+
+.progress-bar .progress-loading {
+    background-color: var(--purple-color-acid);
+    animation: progress-loading 5s infinite linear;
+}
+
+@keyframes progress-loading {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;;
+    }
+}

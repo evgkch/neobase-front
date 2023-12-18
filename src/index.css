@@ -1,5 +1,6 @@
 :root {
   --black-color-0: #18191F;
+  --black-color-0-1: #1B1F18;
   --black-color-1: #474A57;
   --black-color-2: #474A57;
   --black-color-3: #9FA4B4;
@@ -37,7 +38,8 @@
   --size-l: 24px;
   --size-xl: 32px;
 
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Montserrat';
   line-height: 1.5;
   font-weight: 400;
 

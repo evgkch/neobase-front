@@ -90,16 +90,16 @@ export const Info = () => {
     return (
         <>
             <div className="statistics row">
-                <Statistics value={state.accountCounter} status={state.status}>accounts</Statistics>
-                <Statistics value={state.balance} status={state.status}>TON saved</Statistics>
+                <Statistics value={state.accountCounter} status={state.status} class="box-white bordered bordered-white shadowed-blue">accounts</Statistics>
+                <Statistics value={state.balance} status={state.status} class="box-white bordered bordered-white shadowed-blue">TON saved</Statistics>
             </div>
         </>
     )
 }
 
-function Statistics(props: { status: Status, value?: any, children: ReactNode }) {
+export function Statistics(props: { status: Status, value?: any, children: ReactNode, class?: string }) {
     return (
-        <div className="box box-white bordered bordered-white shadowed-blue column float-center">
+        <div className={`box column float-center ${props.class ?? ''}`}>
             {props.status === 'pending'
                 ? <Animations.Terminal />
                 : props.status === 'loaded'

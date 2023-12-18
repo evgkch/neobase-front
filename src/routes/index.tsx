@@ -8,7 +8,7 @@ import * as Solo from "./Solo";
   
 export const router = createMemoryRouter(createRoutesFromElements(
     <>
-        <Route index path="/" element={<Welcome />} />
+        <Route index path="/" element={<Welcome />}  />
         <Route path="/main" element={ <Main />} />
         <Route path="/solo" element={<Solo.Boarding />} />
         <Route key="target" path="/solo/target" element={<Solo.Target />} />

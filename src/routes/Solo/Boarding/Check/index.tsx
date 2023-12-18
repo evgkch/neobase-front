@@ -18,6 +18,15 @@ export const Check = () => {
 
     const { sender } = useTonConnect();
 
+    const next = async () => {
+        await solo.content.master.content.contract?.sendCreateAccount(sender, toNano(0.1), {
+            goalAmount: toNano(solo.content.boarding.content.goalAmount),
+            risk: solo.content.boarding.content.risk,
+            heroId: 1
+        });
+        navigate('/solo/account');
+    };
+
     useEffect(() => {
 
         const back = () => navigate(-1);
@@ -38,14 +47,6 @@ export const Check = () => {
             WebApp.MainButton.offClick(next);
         }
     }, []);
-
-    const next = async () => {
-        solo.content.master.content.contract?.sendCreateAccount(sender, toNano(0.1), {
-            goalAmount: toNano(solo.content.boarding.content.goalAmount),
-            risk: solo.content.boarding.content.risk,
-            heroId: 1
-        });
-    };
 
     return (
         <div className="boarding">

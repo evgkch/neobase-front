@@ -1,112 +1,193 @@
-import {  useState } from "react";
-import {  } from "@tonconnect/ui-react";
-import { OpenedContract,  toNano } from "ton-core";
+import {  useEffect, useState } from "react";
+import { useTonWallet } from "@tonconnect/ui-react";
+import { OpenedContract,  fromNano } from "ton-core";
 import { Status } from "../Boarding/Info";
 import { Kaomoji } from "../../../helpers";
-import { Animations } from "../../../components/Loader/Loader";
 import { SoloAccount } from "neobase/wrappers/SoloAccount";
-import { useTonConnect } from "../../../hooks/useTonConnect";
+import { Statistics } from "../Boarding/Info";
+
+import "./style.css";
+import solo from "../../../model/solo";
+import { ContractState } from "../../../helpers/contract";
+import { risk2comission } from "../Boarding/Risk";
+import { useNavigate } from "react-router-dom";
+import WebApp from "@twa-dev/sdk";
+import { Colors } from "../../../helpers/colors";
+import { Animations } from "../../../components/Loader/Loader";
 
 interface State {
     status: Status
-    balance?: string,
-    goalAmount?: string,
-    restAmount?: string,
+    balance?: number,
+    goalAmount?: number,
+    restAmount?: number,
     risk?: number,
     t0?: number,
     tN?: number,
-    bN?: string,
+    bN?: number,
     grade?: bigint
 }
 
-let acc: OpenedContract<SoloAccount>;
-
 export const Account = () => {
 
-    // const wallet = useTonWallet();
+    const wallet = useTonWallet();
+    const navigate = useNavigate();
 
-    const [state] = useState<State>({ status: 'pending' });
+    const [state, setState] = useState<State>({ status: 'pending' });
 
-    const { sender } = useTonConnect();
+    // const { sender } = useTonConnect();
 
-    const [deposit, setDeposit] = useState(0);
+    // const [deposit, setDeposit] = useState(0);
 
-    // useEffect(() => {
-    //     if (wallet?.account && solo) {
-    //         solo.getAccountAddress(
-    //             Address.parse(wallet.account.address)
-    //         ).then(address => openContract(new SoloAccount(address)).then(account => {
-    //             acc = account;
-    //             Promise.all([
-    //                 account.getMyBalance(),
-    //                 account.getGoalAmount(),
-    //                 account.getRestAmount(),
-    //                 account.getRisk(),
-    //                 account.getT0(),
-    //                 account.getTN(),
-    //                 account.getBN(),
-    //                 account.getGrade()
-    //             ]).then(res => {
-    //                 const [balance, goalAmount, restAmount, risk, t0, tN, bN, grade] = res;
-    //                 setState({
-    //                     ...state,
-    //                     balance: fromNano(balance),
-    //                     goalAmount: fromNano(goalAmount),
-    //                     restAmount: fromNano(restAmount),
-    //                     risk,
-    //                     t0,
-    //                     tN,
-    //                     bN: fromNano(bN),
-    //                     grade,
-    //                     status: 'loaded'
-    //                 });
-    //             })
-    //         }));
+    useEffect(() => {
+        
+        const back = () => navigate(-1);
+        WebApp.BackButton.show();
+        WebApp.BackButton.onClick(back);
+        
+        //const contract = SoloMaster.createFromAddress(Address.parse(import.meta.env.VITE_SOLO_MASTER_TEST_ADDRESS));
 
-    //     }
-    // }, [wallet?.account, solo]);
+        
+        WebApp.MainButton.enable();
+        WebApp.setHeaderColor(Colors.BLACK);
+        WebApp.MainButton.hide();
 
-    const onGoalAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.floor(Number(event.target.value));
+        return () => {
+            WebApp.BackButton.offClick(back);
+        }
+    }, []);
 
-        // Update state
-        setDeposit(value);
-    }
+    useEffect(() => {
+
+        if (!wallet) return;
+
+        let unsubscribe: any;
+
+        unsubscribe = solo.content.account.rx.on('update', init);
+
+        init(solo.content.account.content);
+
+        function init(account: ContractState<SoloAccount>['content']) {
+            switch(account.status) {
+                case 'init':
+                    solo.openAccount(wallet!);
+                    break;
+                case 'opened':
+                    if (account.deployed) {
+                        loadData(solo.content.account.content.contract!);
+                    }
+                    else throw `Solo Account is not deployed`;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+
+        async function loadData(contract: OpenedContract<SoloAccount>) {
+            try {
+                const [
+                    balance,
+                    goalAmount,
+                    restAmount,
+                    risk,
+                    t0,
+                    tN,
+                    bN,
+                    grade
+                ] =
+                    await Promise.all([
+                        contract.getMyBalance(),
+                        contract.getGoalAmount(),
+                        contract.getRestAmount(),
+                        contract.getRisk(),
+                        contract.getT0(),
+                        contract.getTN(),
+                        contract.getBN(),
+                        contract.getGrade()
+                    ]);
+                    setState({
+                        ...state,
+                        balance: Number(fromNano(balance)),
+                        goalAmount: Number(fromNano(goalAmount)),
+                        restAmount: Number(fromNano(restAmount)),
+                        risk,
+                        t0,
+                        tN,
+                        bN: Number(fromNano(bN)),
+                        grade,
+                        status: 'loaded'
+                    });
+            } catch(e) {
+                setState({ status: 'error' });
+            }
+        }
+
+        return () => {
+            solo.content.account?.rx.off('update', unsubscribe);
+        };
+
+    }, [wallet])
+
+    // const onGoalAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const value = Math.floor(Number(event.target.value));
+
+    //     // Update state
+    //     setDeposit(value);
+    // }
     
+    // @ts-ignore
+    const progress = state.bN / state.goalAmount;
+    // @ts-ignore
+    const days = Math.floor((state.tN - state.t0) / (60 * 60 * 24));
 
     return (
-        <div className="balance box box-blue float-left">
-            <div className="row float-near-border">
-                <div>Total balance</div>
-                {state.status === 'loaded'
-                    ? <div className="kaomoji status">{Kaomoji.CRYING}</div>
-                    : <Animations.RunnigMan />
-                }
+        <div className="account">
+            <div className="info">
+                <div className="box">
+                   <Hero />
+                   {state.grade
+                        ? <h2 className="purple">{state.grade.toString()} grade</h2>
+                        : <h2 className="purple"><Animations.Terminal /> grade</h2>
+                   }
+                  
+                </div>
+                <div className="box">
+                    <ProgressBar progress={progress}/>
+                    {progress
+                        ? <h2>{Math.floor(progress * 100)}% progress</h2>
+                        : <h2><Animations.Terminal /> progress</h2>
+                    }
+                </div>
+                
+                <div className="row">
+                    <Statistics value={`${state.risk && risk2comission(state.risk)}`} status={state.status} class="value">Risk</Statistics>
+                    <Statistics value={`${state.bN?.toFixed(2)}/${state.goalAmount?.toFixed(2)}`} status={state.status} class="value">TON</Statistics>
+                    <Statistics value={days} status={state.status} class="value">Days</Statistics>
             </div>
-            <div className="value row float-left">
-                {state.status === 'loaded'
-                    ? <div>{state.bN}</div>
-                    : <Animations.Terminal />
-                }
-                <div> TON</div>
             </div>
-            <div className="box box-black-green target">
-                <label>
-                    <input
-                        type="number"
-                        step={1}
-                        pattern="\d*"
-                        inputMode="numeric"
-                        // defaultValue={state.goalAmount}
-                        onChange={onGoalAmountChange}
-                        value={'' + deposit}
-                        style={{ width: ('1' + deposit).length + 'ch' }}
-                    />
-                    <div>TON <Animations.Terminal /></div>
-                </label>
-            </div>
-            <button onClick={() => acc.sendDeposit(sender, toNano(deposit))}>SEND</button>
+            
         </div>
     );
 
+}
+
+function ProgressBar(props: { progress?: number }) {
+    console.log(props.progress);
+    
+    return (
+        <div className="bordered progress-bar">
+            {props.progress !== undefined && !isNaN(props.progress) &&
+                <div className="bordered bordered-green progress" style={{ width: `${props.progress * 100}%` }}>
+                </div>
+            }
+        </div>
+    );
+}
+
+function Hero() {
+    return (
+        <div className={`box box-black-purple bordered bordered-purple hero-content`}>
+            <div className="reflecting">{Kaomoji.REFLECTED.CAT}</div>
+        </div>
+    );
 }

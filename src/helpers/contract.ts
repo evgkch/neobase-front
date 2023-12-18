@@ -4,14 +4,13 @@ import { client } from "../api";
 
 export class ContractState<T extends Contract>  extends State<
     {
-        status: 'init' | 'pending' | 'error' | 'opened',
+        status: 'init' | 'pending' | 'error' | 'opened' | 'closed',
         contract?: OpenedContract<T>,
         deployed?: boolean
     }> {
 
-    constructor(contract: T) {
+    constructor() {
         super({ status: 'init' });
-        this.open(contract);
         // MAYBE TODO 
         // open on error again
     }
@@ -20,6 +19,7 @@ export class ContractState<T extends Contract>  extends State<
         switch(this.content.status) {
             case 'init':
             case 'error':
+            case 'closed':
                 this.update({ status: 'pending' });
                 client
                     .then(async (client) => {
@@ -34,10 +34,22 @@ export class ContractState<T extends Contract>  extends State<
                             status: 'error'
                         });
                     })
-                return;
+                break;
             default:
-                return;
+                break;
         }
+        return this;
+    }
+
+    close = () => {
+        switch(this.content.status) {
+            case 'opened':
+                this.set({ status: 'closed' })
+                break;
+            default:
+                break;
+        }
+        return this;
     }
 
     checkIsDeployed = () => {
