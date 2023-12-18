@@ -223,7 +223,7 @@ section {
 }
 
 .banners section {
-  min-width: 62%;
+  min-width: 90%;
 }
 
 .banner {
@@ -261,13 +261,14 @@ h2 {
 .story {
   justify-content: center;
   display: flex;
-  align-content: stretch !important;  
-  align-self: stretch !important;
+  /* align-content: stretch !important;  
+  align-self: stretch !important; */
 }
 
 .story h2 {
   text-wrap: pretty;
   margin: 0;
+  font-size: 1em;
 }
 
 .story section {
