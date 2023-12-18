@@ -10,10 +10,12 @@ export const router = createMemoryRouter(createRoutesFromElements(
     <>
         <Route index path="/" element={<Welcome />} />
         <Route path="/main" element={ <Main />} />
-        <Route path="/solo" element={<Solo.Boarding />} />
-        <Route path="/solo/target" element={<Solo.Target />} />
-        <Route path="/solo/risk" element={<Solo.Risk />} />
-        <Route path="/solo/hero" element={<Solo.Hero />} />
-        <Route path="/solo/check" element={<Solo.Check />} />
+            <Route path="/solo" element={<Solo.Boarding />} children={[
+                <Route key="target" path="/solo/target" element={<Solo.Target />} />,
+                <Route key="risk" path="/solo/risk" element={<Solo.Risk />} />,
+                <Route key="hero" path="/solo/hero" element={<Solo.Hero />} />,
+                <Route key="check" path="/solo/check" element={<Solo.Check />} />
+            ]} />
+        
     </>
 ));

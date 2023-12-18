@@ -70,21 +70,35 @@ button:hover .kaomoji {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  margin-inline: 0.75rem;
-  margin-top: 0.75rem;
   border-radius: var(--size-m);
   color: var(--black-color-0);
   box-shadow: 8px 8px var(--black-color-0);
   border: solid 2px var(--black-color-0);
   transition: transform 300ms;
+  margin: 0.5em;
 }
 
 .scroll-box {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
-  padding-bottom: 1em;
   scroll-snap-type: y mandatory;/* do not set template columns and rows */
+}
+
+.scroll-box-x {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;/* do not set template columns and rows */
+}
+
+.scroll-box-x section {
+  display: grid;
+  white-space: nowrap;
+  scroll-snap-align: start;
+}
+
+.scroll-box-x .banner {
+  white-space: normal;
 }
 
 /* White Box */
@@ -204,12 +218,67 @@ button:hover .kaomoji {
 ----------------------------------
 */
 
+section {
+  height: 100%;
+}
+
+.banners section {
+  min-width: 62%;
+}
+
 .banner {
   align-items: flex-start;
 }
 
 .banner button {
   width: 100%;
+}
+
+.banner p {
+  text-wrap: wrap;
+}
+
+h2 {
+  margin-block: var(--size-xs);
+}
+
+.banner button {
+  width: 100%;
+}
+
+.banner p {
+  text-wrap: wrap;
+}
+
+
+/*
+----------------------------------
+------------ Banner --------------
+----------------------------------
+*/
+
+.stories {
+  position: sticky;
+}
+
+.story {
+  justify-content: center;
+  display: flex;
+  align-content: stretch !important;  
+  align-self: stretch !important;
+}
+
+.story h2 {
+  text-wrap: pretty;
+  margin: 0;
+}
+
+.story section {
+  scroll-snap-align: start;
+}
+
+.stories section {
+  min-width: 31%;
 }
 
 /*
@@ -283,6 +352,18 @@ button.button-green-acid:hover {
 
 button.button-green-acid, button.button-green-acid:active {
   color: var(--green-color-acid);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+button.button-purple-acid:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--purple-color-acid);
+}
+
+button.button-purple-acid, button.button-purple-acid:active {
+  color: var(--purple-color-acid);
   border-color: var(--black-color-0);
   background-color: var(--black-color-0);
 }
@@ -369,6 +450,7 @@ imput:focus {
 
 ol {
   list-style-type: hiragana;
+  margin-block: var(--size-xs);
 }
 
 /*

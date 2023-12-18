@@ -5,9 +5,8 @@ import { Kaomoji } from "../../../../helpers";
 import { Animations } from "../../../../components/Loader/Loader";
 import { Colors } from "../../../../helpers/colors";
 
-import * as model from '../../../../model';
-
 import "./style.css"
+import solo from "../../../../model/solo";
 
 interface State {
     goalAmount: number,
@@ -17,7 +16,7 @@ interface State {
 export const Target = () => {
 
     const [state, setState] = useState<State>({
-        goalAmount: model.solo.state.goalAmount,
+        goalAmount: solo.content.boarding.content.goalAmount,
         valid: true
     });
 
@@ -36,7 +35,7 @@ export const Target = () => {
         });
 
         if (isValid) {
-            model.solo.set('goalAmount', value);
+            solo.content.boarding.update({ goalAmount: value });
             WebApp.MainButton.enable();
         }
         else {

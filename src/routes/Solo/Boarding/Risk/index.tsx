@@ -4,9 +4,8 @@ import WebApp from "@twa-dev/sdk";
 import { Kaomoji } from "../../../../helpers";
 import { Colors } from "../../../../helpers/colors";
 
-import * as model from '../../../../model';
-
 import "./style.css";
+import solo from "../../../../model/solo";
 
 interface State {
     risk: number
@@ -19,14 +18,14 @@ const numRisk2select = (goalAmount: number) => Math.floor(Math.log2(goalAmount))
 export const Risk = () => {
 
     const [state, setState] = useState<State>({
-        risk: model.solo.state.risk
+        risk: solo.content.boarding.content.risk
     });
 
     const navigate = useNavigate();
 
     const handleRiskOptionClick = (risk: number) => {
         setState({ ...state, risk });
-        model.solo.set('risk', risk);
+        solo.content.boarding.update({ risk });
     }
 
     useEffect(() => {
@@ -50,7 +49,7 @@ export const Risk = () => {
         <div className="boarding">
             <div className="box box-white guide">
                 <ol>
-                    <li>Target is {model.solo.state.goalAmount} TON</li>
+                    <li>Target is {solo.content.boarding.content.goalAmount} TON</li>
                 </ol>
             </div>
             <div className="box box-white">
@@ -65,11 +64,11 @@ export const Risk = () => {
                         }</b>
                 </div>
                 <div className="row description float-left ">
-                    <p>For example, if you widthdraw {(model.solo.state.goalAmount / 10).toFixed(2)} TONs you will pay {(model.solo.state.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
+                    <p>For example, if you widthdraw {(solo.content.boarding.content.goalAmount / 10).toFixed(2)} TONs you will pay {(solo.content.boarding.content.goalAmount / 10 / (1 << state.risk)).toFixed(2)} TONs as comission</p>
                 </div>
             </div>
             <div className="in-2-columns scroll-box">
-                {Array.from({ length: numRisk2select(model.solo.state.goalAmount) }, (_, i) =>
+                {Array.from({ length: numRisk2select(solo.content.boarding.content.goalAmount) }, (_, i) =>
                     <div
                         className={`box ${state.risk === i + 1 ? 'box-green-acid risk-selected' : 'box-black-green'} risk`}
                         key={i}

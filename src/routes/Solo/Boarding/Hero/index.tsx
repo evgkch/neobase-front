@@ -4,9 +4,8 @@ import WebApp from "@twa-dev/sdk";
 import { Kaomoji } from "../../../../helpers";
 import { Colors } from "../../../../helpers/colors";
 
-import * as model from '../../../../model';
-
 import "./style.css"
+import solo from "../../../../model/solo";
 
 const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
 
@@ -25,7 +24,7 @@ const heroes = [
 
 export const Hero = () => {
 
-    const [hero, setHero] = useState(model.solo.state.hero);
+    const [hero, setHero] = useState(solo.content.boarding.content.hero);
 
     const navigate = useNavigate();
 
@@ -52,8 +51,8 @@ export const Hero = () => {
         <div className="boarding">
             <div className="box box-white guide">
                 <ol>
-                    <li>Target is {model.solo.state.goalAmount} TON</li>
-                    <li>Risk is {risk2comission(model.solo.state.risk)}</li>
+                    <li>Target is {solo.content.boarding.content.goalAmount} TON</li>
+                    <li>Risk is {risk2comission(solo.content.boarding.content.risk)}</li>
                 </ol>
             </div>
             <div className="box box-white">
@@ -70,7 +69,7 @@ export const Hero = () => {
                         key={item}
                         content={item}
                         selected={hero === item}
-                        select={() => { setHero(item); model.solo.set('hero', item) }}
+                        select={() => { setHero(item); solo.content.boarding.update({ hero: item }) }}
                     />
                 )}
             </div>

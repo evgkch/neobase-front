@@ -1,29 +1,29 @@
 import WebApp from "@twa-dev/sdk"
 
-import { SoloMaster } from "neobase/wrappers/SoloMaster"
-
 import "./style.css"
 import { useNavigate } from "react-router-dom"
 import { ReactNode, useEffect, useState } from "react"
-import clientPromise from "../../../controllers/client"
-import { Address, fromNano } from "ton-core"
+import { OpenedContract, fromNano } from "ton-core"
 import { Animations } from "../../../components/Loader/Loader"
 import { Colors } from "../../../helpers/colors"
 import { Kaomoji } from "../../../helpers"
+import solo from "../../../model/solo"
+import { SoloMaster } from "neobase/wrappers/SoloMaster"
 
 export type Status =  'pending' | 'loaded' | 'error';
 
 interface State {
     status: Status,
     accountCounter?: string,
-    fundBalance?: string
+    balance?: string
 }
 
 export const Info = () => {
 
     const navigate = useNavigate();
     const [state, setState] = useState({ status: 'pending' } as State);
-
+    
+    // Telegram Navigation
     useEffect(() => {
 
         const back = () => navigate(-1);
@@ -42,44 +42,64 @@ export const Info = () => {
         WebApp.MainButton.textColor = Colors.BLACK;
         WebApp.MainButton.show();
 
-        const contract = SoloMaster.createFromAddress(Address.parse(import.meta.env.VITE_SOLO_MASTER_TEST_ADDRESS));
-        clientPromise.then(client => {
-            const api = client.open(contract);
-            Promise
-                .all([api.getAccountCounter(), api.getMyBalance()])
-                .then(res => 
-                    setState({
-                        status: 'loaded',
-                        accountCounter: Number(res[0]).toString(),
-                        fundBalance: Number(fromNano(res[1])).toFixed(2)
-                    })
-                )
-        }).catch(() => {
-            setState({
-                status: 'error'
-            })
-        });
-
         return () => {
             WebApp.BackButton.offClick(back);
             WebApp.MainButton.offClick(next);
         }
-    }, [])    
+    }, [])
+
+    // Load data
+    useEffect(() => {
+
+        let unsubscribe: any;
+
+        if (solo.content.master.content.status === 'opened') {
+            loadData(solo.content.master.content.contract!)
+        }
+        else {
+            unsubscribe = solo.content.master.rx.on('update', async content => {
+                if (content.status === 'opened') {
+                    loadData(content.contract!);
+                }
+            })
+        }
+
+        async function loadData(contract: OpenedContract<SoloMaster>) {
+            try {
+                const [accountCounter, balance] =
+                    await Promise.all([
+                        contract.getAccountCounter(),
+                        contract.getMyBalance()
+                    ]);
+                setState({
+                    status: 'loaded',
+                    accountCounter: Number(accountCounter).toString(),
+                    balance: Number(fromNano(balance)).toFixed(2)
+                })
+            } catch(e) {
+                setState({ status: 'error' });
+            }
+        }
+
+        return () => {
+            solo.content.master.rx.off('update', unsubscribe);
+        };
+
+    }, [])
 
     return (
         <>
             <div className="statistics row">
                 <Statistics value={state.accountCounter} status={state.status}>accounts</Statistics>
-                <Statistics value={state.fundBalance} status={state.status}>TON saved</Statistics>
+                <Statistics value={state.balance} status={state.status}>TON saved</Statistics>
             </div>
-            <Guide />
         </>
     )
 }
 
 function Statistics(props: { status: Status, value?: any, children: ReactNode }) {
     return (
-        <div className="column float-center">
+        <div className="box box-white column float-center">
             {props.status === 'pending'
                 ? <Animations.Terminal />
                 : props.status === 'loaded'
@@ -87,20 +107,6 @@ function Statistics(props: { status: Status, value?: any, children: ReactNode })
                     : <div className="error">{Kaomoji.ERROR}</div>
             }
             <div>{props.children}</div>
-        </div>
-    )
-}
-
-function Guide() {
-    return (
-        <div className="box box-white guide">
-            <ol>
-                <li>Set Target Amount</li>
-                <li>Choose Risk</li>
-                <li>Create Hero</li>
-                <li>Start to safe in comfortable way</li>
-                <li>Get dNFT in the end to your wallet and start to receive dividends</li>
-            </ol>
         </div>
     )
 }

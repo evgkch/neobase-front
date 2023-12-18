@@ -10,7 +10,9 @@ import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { router } from "./routes";
 
 WebApp.ready();
+
 function App() {
+
   return (
     <>
       <TonConnectUIProvider manifestUrl={import.meta.env.VITE_MANIFEST_URL}>

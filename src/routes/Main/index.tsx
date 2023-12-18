@@ -8,6 +8,7 @@ import { useTonWallet } from "@tonconnect/ui-react";
 import { Animations } from "../../components/Loader/Loader";
 import { Kaomoji } from "../../helpers";
 import { Colors } from "../../helpers/colors";
+import { Story } from "../../components/Story";
 
 export function Main() {
 
@@ -28,13 +29,51 @@ export function Main() {
         <div className="main">
             <Header />
             <div className="content">
+                <div className="scroll-box-x row stories">
+                        <section>
+                            <Story title="What is Neobase? " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="How starts to receive devidens? " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="What is Grade?" go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="More about Grade system " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="A story will be there " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="A story will be there " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="A story will be there " go={() => {}}/>
+                        </section>
+                        <section>
+                            <Story title="A story will be there " go={() => {}}/>
+                        </section>
+                </div>
                 <Balance />
-                <Banner
-                    title="🥹 Solo Challenge #1"
-                    description="Start to save coins in comfortable way. Test version avaliable now"
-                    go={onSoloClick}
-                    color="green-acid"
-                />
+                <div className="scroll-box-x row banners">
+                    <section>
+                        <Banner
+                            title="🥹 Solo Challenge #1"
+                            description="Start to save coins in comfortable way. Test version avaliable now"
+                            go={onSoloClick}
+                            color="green-acid"
+                        />
+                    </section>
+                    <section>
+                        <Banner
+                            title="🤟 Mass Challenge #1"
+                            description="Start to save coins in comfortable way. Comming Soon. "
+                            go={onSoloClick}
+                            color="purple-acid"
+                        />
+                    </section>
+                </div>
             </div>
         </div>
     );
