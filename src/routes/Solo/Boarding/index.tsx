@@ -2,11 +2,16 @@ import "./style.css"
 import { Info } from './Info'
 import { Title } from "./Title"
 import { Story } from "../../../components/Story";
+import { useNavigate } from "react-router-dom";
 export { Target } from './Target';
 export { Risk } from './Risk';
 export { Hero } from './Hero';
 
 export const Boarding = () => {
+    const navigate = useNavigate();
+    const next = () => {
+        navigate('/solo/target')
+    }
     return (
         <div className="boarding">
             <Title />
@@ -38,6 +43,7 @@ export const Boarding = () => {
                 </section>
             </div>
             <Guide />
+            {import.meta.env.DEV && <button className="button-green-acid" onClick={next}>Next</button>}
         </div>
     )
 }
