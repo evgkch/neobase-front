@@ -30,30 +30,30 @@ export function Main() {
             <Header />
             <div className="content">
                 <div className="scroll-box-x row stories">
-                        <section>
-                            <Story title="What is Neobase? " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="How starts to receive devidens? " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="What is Grade?" go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="More about Grade system " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="A story will be there " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="A story will be there " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="A story will be there " go={() => {}}/>
-                        </section>
-                        <section>
-                            <Story title="A story will be there " go={() => {}}/>
-                        </section>
+                    <section>
+                        <Story title="What is Neobase? " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="How starts to receive devidens? " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="What is Grade?" go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="More about Grade system " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="A story will be there " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="A story will be there " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="A story will be there " go={() => {}}/>
+                    </section>
+                    <section>
+                        <Story title="A story will be there " go={() => {}}/>
+                    </section>
                 </div>
                 <Balance />
                 <div className="scroll-box-x row banners">
@@ -89,7 +89,7 @@ function Balance() {
     })
 
     return (
-        <div className="balance box box-white float-left">
+        <div className="balance box box-white bordered bordered-white shadowed float-left">
             <div className="row float-near-border">
                 <div>Total balance</div>
                 {loaded

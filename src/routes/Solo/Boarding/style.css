@@ -12,12 +12,9 @@
 .guide {
     display: flex;
     flex-direction: column;
-    border: 2px solid;
-    border-radius: 16px;
     font-weight: 600;
     color: var(--black-color-0);
     text-align: left;
-    box-shadow: 8px 8px var(--purple-color-acid) !important;
 }
 
 .guide li::marker {

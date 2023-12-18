@@ -99,7 +99,7 @@ export const Info = () => {
 
 function Statistics(props: { status: Status, value?: any, children: ReactNode }) {
     return (
-        <div className="box box-white column float-center">
+        <div className="box box-white bordered bordered-white shadowed-blue column float-center">
             {props.status === 'pending'
                 ? <Animations.Terminal />
                 : props.status === 'loaded'

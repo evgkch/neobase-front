@@ -49,7 +49,7 @@ export const Check = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-black-purple card">
+            <div className="box box-black-purple bordered shadowed-purple card">
                 <div className="row float-near-border info">
                     <h2>{solo.content.boarding.content.goalAmount} TON</h2>
                     <h2>RISK {risk2comission(solo.content.boarding.content.risk)}</h2>
@@ -57,7 +57,7 @@ export const Check = () => {
                 <div className="row float-near-border hero">
                     <h1 className="reflecting">{solo.content.boarding.content.hero}</h1>
                 </div>
-                <button onClick={next}></button>
+                {import.meta.env.DEV && <button onClick={next}></button>}
             </div>
         </div>
     )

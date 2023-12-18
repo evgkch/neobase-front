@@ -9,25 +9,13 @@
 
 .target label {
     /* color: var(--green-color-acid); */
-    float: left;
     font-size: x-large;
     background-color: inherit;
 }
 
-.target input {
+.target, .target input {
     color: var(--green-color-acid);
-}
-
-.target:has(input:focus) {
-    background-color: var(--green-color-acid);
-    border-color: var(--green-color-acid);
-    box-shadow: 8px 8px var(--black-color-0);
-    /* transform: translate(var(--size-s), var(--size-s)); */
-    border-color: var(--black-color-0);
-}
-
-.target:has(input:focus), .target:has(input:focus) input {
-    color: var(--black-color-0);
+    text-align: right;
 }
 
 .target:has(input:focus) .terminal-loading {

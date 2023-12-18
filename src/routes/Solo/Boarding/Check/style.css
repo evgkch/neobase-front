@@ -1,5 +1,6 @@
 .card {
     color: var(--purple-color-acid);
+    border-color: var(--black-color-0);
 }
 
 .card .hero {

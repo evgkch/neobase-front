@@ -59,6 +59,75 @@ button:hover .kaomoji {
   grid-auto-rows: max-content;
 }
 
+/*
+----------------------------------
+------------ Shadowed ------------
+----------------------------------
+*/
+
+.shadowed {
+  box-shadow: var(--size-xs) var(--size-xs) var(--black-color-0);
+}
+
+/* Black Box */
+
+.shadowed-black {
+  box-shadow: var(--size-xs) var(--size-xs)  var(--black-color-0);
+}
+
+.shadowed-black-light {
+  box-shadow: var(--size-xs) var(--size-xs)  var(--black-color-1);
+}
+
+.shadowed-purple {
+  box-shadow: var(--size-xs) var(--size-xs) var(--purple-color-acid);
+}
+
+.shadowed-green {
+  box-shadow: var(--size-xs) var(--size-xs) var(--green-color-acid);
+}
+
+.shadowed-blue {
+  box-shadow: var(--size-xs) var(--size-xs) var(--blue-color-acid);
+}
+
+/*
+----------------------------------
+------------ Bordered ------------
+----------------------------------
+*/
+
+.bordered {
+  border-style: solid;
+  border-width: 2px;
+  border-radius: var(--size-m);
+}
+
+/* Black Box */
+
+.bordered-white {
+  border-color: white;
+}
+
+.bordered-black {
+  border-color: var(--black-color-0);
+}
+
+.bordered-black-light {
+  border-color: var(--black-color-1);
+}
+
+.bordered-purple-acid {
+  border-color: var(--purple-color-acid);
+}
+
+.bordered-green-acid {
+  border-color: var(--green-color-acid);
+}
+
+.bordered-blue-acid {
+  border-color: var(--blue-color-acid);
+}
 
 /*
 ----------------------------------
@@ -70,10 +139,7 @@ button:hover .kaomoji {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  border-radius: var(--size-m);
   color: var(--black-color-0);
-  box-shadow: 8px 8px var(--black-color-0);
-  border: solid 2px var(--black-color-0);
   transition: transform 300ms;
   margin: 0.5em;
 }
@@ -123,21 +189,22 @@ button:hover .kaomoji {
 
 .box-black {
   background-color: var(--black-color-0);
-  box-shadow: 8px 8px  var(--black-color-0);
   border-color:  var(--black-color-0);
 }
 
 .box-black-purple {
   background-color: var(--black-color-0);
-  box-shadow: 8px 8px var(--purple-color-acid);
   border-color: var(--purple-color-acid);
   color: var(--purple-color-acid);
 }
 
 .box-black-green {
   background-color: var(--black-color-0);
-  box-shadow: 8px 8px var(--green-color-acid);
-  border-color: var(--green-color-acid);
+  color: var(--green-color-acid);
+}
+
+.box-black-blue {
+  background-color: var(--blue-color-acid);
   color: var(--green-color-acid);
 }
 
@@ -247,7 +314,7 @@ section {
 }
 
 h2 {
-  margin-block: var(--size-xs);
+  margin-block: var(--size-s);
 }
 
 .banner button {
@@ -269,6 +336,8 @@ h2 {
 .story {
   justify-content: center;
   display: flex;
+  color: var(--green-color-acid);
+  border: solid 1px var(--green-color-acid)
   /* align-content: stretch !important;  
   align-self: stretch !important; */
 }

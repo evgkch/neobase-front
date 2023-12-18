@@ -50,7 +50,7 @@ export const Boarding = () => {
 
 function Guide() {
     return (
-        <div className="box box-white guide">
+        <div className="box box-white bordered bordered-white shadowed guide ">
             <h2>How to Start?</h2>
             <ol>
                 <li>Set Target Amount</li>

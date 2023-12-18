@@ -11,10 +11,6 @@
     border-radius: var(--size-xl);
 }
 
-.hero-selected {
-    box-shadow: 8px 8px var(--black-color-0);
-}
-
 .hero-content  div {
     animation-duration: 2s;
 }

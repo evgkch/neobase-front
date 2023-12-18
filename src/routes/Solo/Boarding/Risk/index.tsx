@@ -47,12 +47,12 @@ export const Risk = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-white guide">
+            <div className="box box-white guide bordered bordered-white shadowed-blue">
                 <ol>
                     <li>Target is {solo.content.boarding.content.goalAmount} TON</li>
                 </ol>
             </div>
-            <div className="box box-white">
+            <div className="box box-white bordered bordered-white shadowed">
                 <div className="row float-near-border">
                         <b>Set risk</b>
                         <b className="kaomoji status">{
@@ -70,7 +70,7 @@ export const Risk = () => {
             <div className="in-2-columns scroll-box">
                 {Array.from({ length: numRisk2select(solo.content.boarding.content.goalAmount) }, (_, i) =>
                     <div
-                        className={`box ${state.risk === i + 1 ? 'box-green-acid risk-selected' : 'box-black-green'} risk`}
+                        className={`box bordered ${state.risk === i + 1 ? 'box-green-acid bordered-green-acid shadowed-black selected' : 'box-black bordered-black shadowed-green'} risk`}
                         key={i}
                         onClick={() => handleRiskOptionClick(i + 1)}
                     >

@@ -65,7 +65,7 @@ export const Target = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-white">
+            <div className="box box-white bordered bordered-white shadowed">
                 <div className="row float-near-border">
                     <b>Set target</b>
                         {state.valid
@@ -77,8 +77,8 @@ export const Target = () => {
                         <p>Description how to set Target Amount and will be happy</p>
                     </div>
                 </div>
-                <div className="box box-black-green target">
-                    <label>
+                <div className="box box-black bordered bordered-black shadowed-green target">
+                    <label className="float-right ">
                         <input
                             type="number"
                             step={1}
@@ -87,7 +87,6 @@ export const Target = () => {
                             // defaultValue={state.goalAmount}
                             onChange={onGoalAmountChange}
                             value={'' + state.goalAmount}
-                            style={{ width: ('1' + state.goalAmount).length + 'ch' }}
                         />
                         <div>TON <Animations.Terminal /></div>
                     </label>

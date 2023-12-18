@@ -5,7 +5,7 @@ interface Props {
 
 export function Story(props: Props) {
     return (
-        <div className={`story box box-black-green`} onClick={props.go}>
+        <div className={`box box-black bordered shadowed-green story`} onClick={props.go}>
             <h2>{props.title}</h2>
         </div>
     )

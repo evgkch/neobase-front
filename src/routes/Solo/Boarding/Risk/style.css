@@ -8,8 +8,10 @@
     padding: var(--size-m);
     cursor: pointer;
     align-self: first baseline;
+    color: var(--green-color-acid);
 }
 
-.risk-selected {
-    box-shadow: 8px 8px var(--black-color-0);
+.selected {
+    color: var(--black-color-0);
+    background-color: var(--green-color-acid);
 }

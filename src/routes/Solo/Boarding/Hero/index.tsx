@@ -49,13 +49,13 @@ export const Hero = () => {
 
     return (
         <div className="boarding">
-            <div className="box box-white guide">
+            <div className="box box-white guide bordered bordered-white shadowed-blue">
                 <ol>
                     <li>Target is {solo.content.boarding.content.goalAmount} TON</li>
                     <li>Risk is {risk2comission(solo.content.boarding.content.risk)}</li>
                 </ol>
             </div>
-            <div className="box box-white">
+            <div className="box box-white bordered bordered-white shadowed">
                 <div className="row float-near-border">
                         <b>Choose Hero</b>
                 </div>
@@ -79,7 +79,7 @@ export const Hero = () => {
 
 export function HeroItem(props: { content: string, children?: ReactNode, selected: boolean, select: () => void }) {
     return (
-        <div className={`box ${props.selected ? 'box-green-acid hero-selected' : 'box-black-green'} hero-content`} onClick={props.select}>
+        <div className={`box ${props.selected ? 'box-green-acid shadowed' : 'box-black-green shadowed-green'} hero-content`} onClick={props.select}>
             <div className="reflecting">{props.content}</div>
             {props.children}
         </div>
