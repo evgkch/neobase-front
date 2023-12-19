@@ -1,6 +1,6 @@
 import {  useEffect, useState } from "react";
 import { useTonWallet } from "@tonconnect/ui-react";
-import { OpenedContract,  fromNano } from "ton-core";
+import { OpenedContract,  fromNano, toNano } from "ton-core";
 import { Status } from "../Boarding/Info";
 import { Kaomoji } from "../../../helpers";
 import { SoloAccount } from "neobase/wrappers/SoloAccount";
@@ -14,6 +14,8 @@ import { useNavigate } from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
 import { Colors } from "../../../helpers/colors";
 import { Animations } from "../../../components/Loader/Loader";
+import { status } from "../../../helpers/state";
+import { useTonConnect } from "../../../hooks/useTonConnect";
 
 interface State {
     status: Status
@@ -34,9 +36,10 @@ export const Account = () => {
 
     const [state, setState] = useState<State>({ status: 'pending' });
 
-    // const { sender } = useTonConnect();
+    const { sender } = useTonConnect();
 
-    // const [deposit, setDeposit] = useState(0);
+    const [deposit, setDeposit] = useState(0);
+    const [withdraw, setWithdraw] = useState(0);
 
     useEffect(() => {
         
@@ -62,78 +65,101 @@ export const Account = () => {
 
         let unsubscribe: any;
 
-        unsubscribe = solo.content.account.rx.on('update', init);
+        unsubscribe = solo.content.account.rx.on('opened', init);
 
         init(solo.content.account.content);
 
-        function init(account: ContractState<SoloAccount>['content']) {
-            switch(account.status) {
-                case 'init':
-                    solo.openAccount(wallet!);
-                    break;
-                case 'opened':
-                    if (account.deployed) {
-                        loadData(solo.content.account.content.contract!);
-                    }
-                    else throw `Solo Account is not deployed`;
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-
-        async function loadData(contract: OpenedContract<SoloAccount>) {
-            try {
-                const [
-                    balance,
-                    goalAmount,
-                    restAmount,
-                    risk,
-                    t0,
-                    tN,
-                    bN,
-                    grade
-                ] =
-                    await Promise.all([
-                        contract.getMyBalance(),
-                        contract.getGoalAmount(),
-                        contract.getRestAmount(),
-                        contract.getRisk(),
-                        contract.getT0(),
-                        contract.getTN(),
-                        contract.getBN(),
-                        contract.getGrade()
-                    ]);
-                    setState({
-                        ...state,
-                        balance: Number(fromNano(balance)),
-                        goalAmount: Number(fromNano(goalAmount)),
-                        restAmount: Number(fromNano(restAmount)),
-                        risk,
-                        t0,
-                        tN,
-                        bN: Number(fromNano(bN)),
-                        grade,
-                        status: 'loaded'
-                    });
-            } catch(e) {
-                setState({ status: 'error' });
-            }
-        }
-
         return () => {
-            solo.content.account?.rx.off('update', unsubscribe);
+            solo.content.account?.rx.off('opened', unsubscribe);
         };
 
     }, [wallet])
 
-    // const onGoalAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const value = Math.floor(Number(event.target.value));
+    const setDepositState = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Math.floor(Number(event.target.value));
 
-    //     // Update state
-    //     setDeposit(value);
-    // }
+        // Update state
+        setDeposit(value);
+    }
+
+    const setWithdrawState = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Math.floor(Number(event.target.value));
+
+        // Update state
+        setWithdraw(value);
+    }
+
+    async function sendDeposit() {
+        await solo.content.account.content!.contract!.sendDeposit(sender, toNano(deposit));
+        
+        solo.openAccount(wallet!);
+    }
+
+    async function sendWithdraw() {
+        await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.01), toNano(withdraw));
+        solo.openAccount(wallet!);
+    }
+
+    async function closeAccount() {
+        await solo.content.account.content!.contract!.sendCloseAccount(sender, toNano(0.01));
+        navigate('/main');
+    }
+
+    function init(account: ContractState<SoloAccount>['content']) {
+        switch(account[status]) {
+            case 'init':
+                solo.openAccount(wallet!);
+                break;
+            case 'opened':
+                if (account.deployed) {
+                    loadData(solo.content.account.content.contract!);
+                }
+                else throw `Solo Account is not deployed`;
+                break;
+            default:
+                break;
+        }
+    }
+    
+
+    async function loadData(contract: OpenedContract<SoloAccount>) {
+        try {
+            const [
+                balance,
+                goalAmount,
+                restAmount,
+                risk,
+                t0,
+                tN,
+                bN,
+                grade
+            ] =
+                await Promise.all([
+                    contract.getMyBalance(),
+                    contract.getGoalAmount(),
+                    contract.getRestAmount(),
+                    contract.getRisk(),
+                    contract.getT0(),
+                    contract.getTN(),
+                    contract.getBN(),
+                    contract.getGrade()
+                ]);
+                setState({
+                    ...state,
+                    balance: Number(fromNano(balance)),
+                    goalAmount: Number(fromNano(goalAmount)),
+                    restAmount: Number(fromNano(restAmount)),
+                    risk,
+                    t0,
+                    tN,
+                    bN: Number(fromNano(bN)),
+                    grade,
+                    status: 'loaded'
+                });
+        } catch(e) {
+            setState({ status: 'error' });
+        }
+    }
     
     // @ts-ignore
     const progress = state.bN / state.goalAmount;
@@ -163,9 +189,41 @@ export const Account = () => {
                     <Statistics value={`${state.risk && risk2comission(state.risk)}`} status={state.status} class="value">Risk</Statistics>
                     <Statistics value={`${state.bN?.toFixed(2)}/${state.goalAmount?.toFixed(2)}`} status={state.status} class="value">TON</Statistics>
                     <Statistics value={days} status={state.status} class="value">Days</Statistics>
+                </div>
             </div>
-            </div>
-            
+           <div className="box">
+            <div className="box box-black bordered bordered-black shadowed-green target">
+                    <label className="float-right row">
+                        <input
+                            type="number"
+                            step={1}
+                            pattern="\d*"
+                            inputMode="numeric"
+                            // defaultValue={state.goalAmount}
+                            onChange={setDepositState}
+                            value={'' + deposit}
+                        />
+                        <div>TON  <Animations.Terminal /></div>
+                    </label>
+                    <button className="button-green-acid" onClick={sendDeposit}>Deposit</button>
+                </div>
+                <div className="box box-black bordered bordered-black shadowed-green target">
+                    <label className="float-right row">
+                        <input
+                            type="number"
+                            step={1}
+                            pattern="\d*"
+                            inputMode="numeric"
+                            // defaultValue={state.goalAmount}
+                            onChange={setWithdrawState}
+                            value={'' + withdraw}
+                        />
+                        <div>TON  <Animations.Terminal /></div>
+                    </label>
+                    <button className="button-green-acid" onClick={sendWithdraw}>Withdraw</button>
+                </div>
+                <button className="button-red" onClick={closeAccount}>Close Account</button>
+           </div>
         </div>
     );
 

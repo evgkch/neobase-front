@@ -1,9 +1,11 @@
 import Channel, { Rx } from "channeljs";
 
-export class State<T> {
+export const status = Symbol('status');
+
+export class State<T extends { [status]: string | number | symbol }> {
 
     static #channels = new WeakMap<State<any>, Channel<[
-        ['update', [content: Readonly<any>]]
+        [string | symbol | number, [content: Readonly<any>]]
     ]>>;
 
     #content: T;
@@ -18,17 +20,17 @@ export class State<T> {
     }
 
     get rx() {
-        return State.#channels.get(this)!.rx as  Rx<[["update", [content: Readonly<T>]]]>;
+        return State.#channels.get(this)!.rx as  Rx<[[T[typeof status], [content: Readonly<T>]]]>;
     }
 
     set = (content: T) => {
         this.#content = content;
-        State.#channels.get(this)!.tx.send('update', this.content);
+        State.#channels.get(this)!.tx.send(content[status], this.content);
     }
 
     update = (content: Partial<T>) => {
         this.#content = { ...this.#content, ...content };
-        State.#channels.get(this)!.tx.send('update', this.content);
+        State.#channels.get(this)!.tx.send(this.#content[status], this.content);
     }
 
 }

@@ -1,14 +1,11 @@
-import WebApp from "@twa-dev/sdk"
-
 import "./style.css"
-import { useNavigate } from "react-router-dom"
 import { ReactNode, useEffect, useState } from "react"
 import { OpenedContract, fromNano } from "ton-core"
 import { Animations } from "../../../components/Loader/Loader"
-import { Colors } from "../../../helpers/colors"
 import { Kaomoji } from "../../../helpers"
 import solo from "../../../model/solo"
 import { SoloMaster } from "neobase/wrappers/SoloMaster"
+import { status } from "../../../helpers/state"
 
 export type Status =  'pending' | 'loaded' | 'error';
 
@@ -20,47 +17,19 @@ interface State {
 
 export const Info = () => {
 
-    const navigate = useNavigate();
     const [state, setState] = useState({ status: 'pending' } as State);
     
-    // Telegram Navigation
-    useEffect(() => {
-
-        const back = () => navigate(-1);
-        WebApp.BackButton.show();
-        WebApp.BackButton.onClick(back);
-
-        const next = () => {
-            navigate('/solo/target');
-        };
-
-        WebApp.MainButton.enable();
-        WebApp.setHeaderColor(Colors.BLUE);
-        WebApp.MainButton.setText('ok (ノ= ⩊ = )ノ go');
-        WebApp.MainButton.onClick(next);
-        WebApp.MainButton.color = '#FFFFFF';
-        WebApp.MainButton.textColor = Colors.BLACK;
-        WebApp.MainButton.show();
-
-        return () => {
-            WebApp.BackButton.offClick(back);
-            WebApp.MainButton.offClick(next);
-        }
-    }, [])
-
     // Load data
     useEffect(() => {
 
         let unsubscribe: any;
 
-        if (solo.content.master.content.status === 'opened') {
+        if (solo.content.master.content[status] === 'opened') {
             loadData(solo.content.master.content.contract!)
         }
         else {
-            unsubscribe = solo.content.master.rx.on('update', async content => {
-                if (content.status === 'opened') {
-                    loadData(content.contract!);
-                }
+            unsubscribe = solo.content.master.rx.on('opened', async content => {
+                loadData(content.contract!);
             })
         }
 
@@ -82,7 +51,7 @@ export const Info = () => {
         }
 
         return () => {
-            solo.content.master.rx.off('update', unsubscribe);
+            solo.content.master.rx.off('opened', unsubscribe);
         };
 
     }, [])

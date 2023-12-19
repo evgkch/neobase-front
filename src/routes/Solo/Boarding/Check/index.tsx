@@ -9,22 +9,34 @@ import "./style.css"
 import { toNano } from "ton-core";
 import { useTonConnect } from "../../../../hooks/useTonConnect";
 import solo from "../../../../model/solo";
+import { useTonWallet } from "@tonconnect/ui-react";
 
 const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
 
 export const Check = () => {
 
     const navigate = useNavigate();
+    const wallet = useTonWallet();
 
     const { sender } = useTonConnect();
 
     const next = async () => {
-        await solo.content.master.content.contract?.sendCreateAccount(sender, toNano(0.1), {
-            goalAmount: toNano(solo.content.boarding.content.goalAmount),
-            risk: solo.content.boarding.content.risk,
-            heroId: 1
-        });
-        navigate('/solo/account');
+        if (wallet) {
+            try {
+                await solo.content.master.content.contract?.sendCreateAccount(sender, toNano(0.1), {
+                    goalAmount: toNano(solo.content.boarding.content.goalAmount),
+                    risk: solo.content.boarding.content.risk,
+                    heroId: 1
+                });
+                navigate('/solo/account');
+            } catch(e) {
+                WebApp.showPopup({ title: '(シ_ _)シ', message: `Confirm transaction to create account` });
+            }
+            
+        }
+        else {
+            WebApp.showPopup({ title: '(シ_ _)シ', message: `Please, connect Wallet!` });
+        }
     };
 
     useEffect(() => {

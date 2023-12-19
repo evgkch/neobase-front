@@ -4,7 +4,6 @@ import "./style.css"
 import { Banner } from "../../components/Banner";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useTonWallet } from "@tonconnect/ui-react";
 import { Animations } from "../../components/Loader/Loader";
 import { Kaomoji } from "../../helpers";
 import { Colors } from "../../helpers/colors";
@@ -12,7 +11,6 @@ import { Story } from "../../components/Story";
 
 export function Main() {
 
-    const wallet = useTonWallet();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,9 +19,7 @@ export function Main() {
         WebApp.BackButton.hide();
     })
 
-    const onSoloClick = () => wallet
-        ? navigate('/solo')
-        : WebApp.showPopup({ title: '(シ_ _)シ', message: `Please, connect Wallet!` });
+    const onSoloClick = () => navigate('/solo');
 
     return (
         <div className="main">

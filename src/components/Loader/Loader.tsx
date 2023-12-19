@@ -4,7 +4,7 @@ import "./style.css";
 
 export namespace Animations {
 
-    export const Terminal = () => <span className="terminal-loading">█ </span>
+    export const Terminal = () => <span className="terminal-loading">▊</span>
 
     export const RunnigMan = () => <span className="reflecting kaomoji">{Kaomoji.REFLECTED.LOADING}</span>
 

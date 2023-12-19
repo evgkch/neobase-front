@@ -15,6 +15,7 @@
 
 .target input {
     margin-right: var(--size-s);
+    width: 60%;
 }
 
 .target, .target input {

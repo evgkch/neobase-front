@@ -2,36 +2,38 @@ import { Contract, OpenedContract } from "ton-core";
 import { State } from "./state";
 import { client } from "../api";
 
+import { status } from "./state";
+
 export class ContractState<T extends Contract>  extends State<
     {
-        status: 'init' | 'pending' | 'error' | 'opened' | 'closed',
+        [status]: 'init' | 'pending' | 'error' | 'opened' | 'closed',
         contract?: OpenedContract<T>,
         deployed?: boolean
     }> {
 
     constructor() {
-        super({ status: 'init' });
+        super({ [status]: 'init' });
         // MAYBE TODO 
         // open on error again
     }
 
     open = (contract: T) => {
-        switch(this.content.status) {
+        switch(this.content[status]) {
             case 'init':
             case 'error':
             case 'closed':
-                this.update({ status: 'pending' });
+                this.update({ [status]: 'pending' });
                 client
                     .then(async (client) => {
                         this.update({
-                            status: 'opened',
+                            [status]: 'opened',
                             contract: client.open(contract),
                             deployed: await client.isContractDeployed(contract.address)
                         });
                     })
                     .catch(() => {
                         this.set({
-                            status: 'error'
+                            [status]: 'error'
                         });
                     })
                 break;
@@ -42,9 +44,9 @@ export class ContractState<T extends Contract>  extends State<
     }
 
     close = () => {
-        switch(this.content.status) {
+        switch(this.content[status]) {
             case 'opened':
-                this.set({ status: 'closed' })
+                this.set({ [status]: 'closed' })
                 break;
             default:
                 break;
@@ -53,18 +55,18 @@ export class ContractState<T extends Contract>  extends State<
     }
 
     checkIsDeployed = () => {
-        switch(this.content.status) {
+        switch(this.content[status]) {
             case 'opened':
                 client
                     .then(async (client) => {
                         this.update({
-                            status: 'opened',
+                            [status]: 'opened',
                             deployed: await client.isContractDeployed(this.content.contract?.address!)
                         });
                     })
                     .catch(() => {
                         this.set({
-                            status: 'error'
+                            [status]: 'error'
                         });
                     })
                 return;
