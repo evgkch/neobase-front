@@ -10,13 +10,18 @@
     padding: var(--size-m);
 }
 
+.info .box {
+    margin: 0;
+}
+
 .info .value {
     color: white;
+    font-size: 0.8em;
 }
 
 .info .value div:first-child {
     font-weight: 800;
-    font-size: x-large;
+    font-size: large;
 }
 
 .progress-bar {
@@ -36,8 +41,9 @@
     font-weight: 800;
 }
 
-.info h2 {
-    color: var(--green-color-acid)
+.info h3 {
+    color: var(--green-color-acid);
+    margin: 0.5em;
 }
 
 .progress-bar .progress-loading {

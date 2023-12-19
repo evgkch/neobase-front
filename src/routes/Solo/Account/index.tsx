@@ -154,8 +154,8 @@ export const Account = () => {
                 <div className="box">
                     <ProgressBar progress={progress}/>
                     {progress
-                        ? <h2>{Math.floor(progress * 100)}% progress</h2>
-                        : <h2><Animations.Terminal /> progress</h2>
+                        ? <h3>{Math.floor(progress * 100)}% progress</h3>
+                        : <h3><Animations.Terminal /> progress</h3>
                     }
                 </div>
                 
