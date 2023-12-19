@@ -10,6 +10,12 @@
     user-select: none;
     color: var(--green-color-acid);
 }
+
+.modal-loader {
+    display: flex;
+    flex-direction: column;
+    color: var(--blue-color-acid);
+}
   
 @keyframes terminal-loader {
     from  { opacity: 1 }

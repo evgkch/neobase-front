@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import WebApp from "@twa-dev/sdk";
 import { Kaomoji } from "../../../../helpers";
@@ -10,25 +10,44 @@ import { toNano } from "ton-core";
 import { useTonConnect } from "../../../../hooks/useTonConnect";
 import solo from "../../../../model/solo";
 import { useTonWallet } from "@tonconnect/ui-react";
+import { Modal } from "../../../../components/Modal";
+import { ModalLoader } from "../../../../components/Loader/Loader";
 
 const risk2comission = (risk: number) => (100 / (1 << risk)).toFixed(2) + '%';
 
 export const Check = () => {
+
+    const [loading, setLoader] = useState(false);
 
     const navigate = useNavigate();
     const wallet = useTonWallet();
 
     const { sender } = useTonConnect();
 
+    const listeners: any[] = [];
+
     const next = async () => {
+
         if (wallet) {
             try {
+                const listener = solo.content.account.rx.on('opened', () => {
+                    if (solo.content.account.content.deployed) {
+                        navigate('/solo/account');
+                    }
+                    else {
+                        solo.content.account.checkIsDeployed();
+                    }
+                })
+
+                listeners.push(listener);
+
                 await solo.content.master.content.contract?.sendCreateAccount(sender, toNano(0.1), {
                     goalAmount: toNano(solo.content.boarding.content.goalAmount),
                     risk: solo.content.boarding.content.risk,
                     heroId: 1
                 });
-                navigate('/solo/account');
+
+                setLoader(true);
             } catch(e) {
                 WebApp.showPopup({ title: '(シ_ _)シ', message: `Confirm transaction to create account` });
             }
@@ -62,6 +81,11 @@ export const Check = () => {
 
     return (
         <div className="boarding">
+            {loading &&
+                <Modal>
+                    <ModalLoader />
+                </Modal>
+            }
             <div className="box box-black-purple bordered shadowed-purple card">
                 <div className="row float-near-border info">
                     <h2>{solo.content.boarding.content.goalAmount} TON</h2>

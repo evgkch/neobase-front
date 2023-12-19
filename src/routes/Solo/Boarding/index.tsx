@@ -4,15 +4,20 @@ import { Title } from "./Title"
 import { useNavigate } from "react-router-dom";
 import { useTonWallet } from "@tonconnect/ui-react";
 import WebApp from "@twa-dev/sdk";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import solo from "../../../model/solo";
 import { status } from "../../../helpers/state";
 import { Colors } from "../../../helpers/colors";
+import { Modal } from "../../../components/Modal";
+import { ModalLoader } from "../../../components/Loader/Loader";
 export { Target } from './Target';
 export { Risk } from './Risk';
 export { Hero } from './Hero';
 
 export const Boarding = () => {
+
+    const [loading, setLoader] = useState(false);
+
     const navigate = useNavigate();
 
     const wallet = useTonWallet();
@@ -25,11 +30,12 @@ export const Boarding = () => {
         const back = () => navigate(-1);
         WebApp.BackButton.show();
         WebApp.BackButton.onClick(back);
-
+        
         next = async () => {
             if (wallet) {
                 switch(solo.content.account.content[status]) {
                     case 'init':
+                        setLoader(true);
                         await solo.openAccount(wallet);
                         break;
                     case 'opened':
@@ -79,6 +85,11 @@ export const Boarding = () => {
 
     return (
         <div className="boarding">
+            {loading &&
+                <Modal>
+                    <ModalLoader />
+                </Modal>
+            }
             <Title />
             <Info />
             <Guide />
