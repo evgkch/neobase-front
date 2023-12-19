@@ -96,12 +96,12 @@ export const Account = () => {
     }
 
     async function sendWithdraw() {
-        await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.01), toNano(withdraw));
+        await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.05), toNano(withdraw));
         solo.openAccount(wallet!);
     }
 
     async function closeAccount() {
-        await solo.content.account.content!.contract!.sendCloseAccount(sender, toNano(0.01));
+        await solo.content.account.content!.contract!.sendCloseAccount(sender, toNano(0.05));
         navigate('/main');
     }
 
