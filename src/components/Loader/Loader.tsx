@@ -12,8 +12,8 @@ export namespace Animations {
 
 }
 
-export const ModalLoader = () =>
+export const ModalLoader = (props: { info: string }) =>
     <div className="modal-loader">
         <Animations.RunnigMan />
-        loading...
+        {props.info}
     </div>

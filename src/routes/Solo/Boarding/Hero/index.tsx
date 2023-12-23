@@ -34,7 +34,7 @@ export const Hero = () => {
         WebApp.BackButton.show();
         WebApp.BackButton.onClick(back);
 
-        const next = () => navigate('/solo/check');
+        const next = () => navigate('/solo/submit');
         WebApp.MainButton.enable();
         WebApp.setHeaderColor(Colors.BLUE);
         WebApp.MainButton.setText(`ok ${Kaomoji.REFLECTED.YEEE} check`);

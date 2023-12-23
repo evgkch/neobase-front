@@ -16,7 +16,7 @@ export { Hero } from './Hero';
 
 export const Boarding = () => {
 
-    const [loading, setLoader] = useState(false);
+    const [loading, setLoader] = useState<false | string>(false);
 
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export const Boarding = () => {
             if (wallet) {
                 switch(solo.content.account.content[status]) {
                     case 'init':
-                        setLoader(true);
+                        setLoader('checking contract status...');
                         await solo.openAccount(wallet);
                         break;
                     case 'opened':
@@ -85,15 +85,15 @@ export const Boarding = () => {
 
     return (
         <div className="boarding">
-            {loading &&
-                <Modal>
-                    <ModalLoader />
-                </Modal>
-            }
             <Title />
             <Info />
             <Guide />
             {import.meta.env.DEV && <button className="button-green-acid" onClick={() => next && next()}>Next</button>}
+            {loading &&
+                <Modal>
+                    <ModalLoader info={loading} />
+                </Modal>
+            }
         </div>
     )
 }

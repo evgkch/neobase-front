@@ -54,23 +54,22 @@ export class ContractState<T extends Contract>  extends State<
         return this;
     }
 
-    checkIsDeployed = () => {
-        switch(this.content[status]) {
-            case 'opened':
-                client
+    checkIsDeployed = async () => {
+        if (this.content[status] === 'opened') {
+            try {
+                await client
                     .then(async (client) => {
                         this.update({
                             [status]: 'opened',
                             deployed: await client.isContractDeployed(this.content.contract?.address!)
                         });
-                    })
-                    .catch(() => {
-                        this.set({
-                            [status]: 'error'
-                        });
-                    })
-                return;
+                    });
+            }
+            catch (e) {
+                throw `Can't check the Contract status`;
+            }
         }
+        else throw `The Contract is not opened`;
     }
 
 };

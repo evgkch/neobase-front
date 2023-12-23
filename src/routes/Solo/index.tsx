@@ -3,6 +3,6 @@ export { Info } from './Boarding/Info'
 export { Target } from './Boarding/Target';
 export { Risk } from './Boarding/Risk';
 export { Hero } from './Boarding/Hero';
-export { Check } from './Boarding/Check';
+export { Submit } from './Boarding/Submit';
 
 export { Account } from './Account';
