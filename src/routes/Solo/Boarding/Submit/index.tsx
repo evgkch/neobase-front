@@ -39,6 +39,11 @@ export const Submit = () => {
 
 class Component extends React.Component<Props, State> {
 
+    constructor(props: Props) {
+        super(props);
+        this.state = { loading: false };
+    }
+
     setLoader = (loading: string | false) => {
         this.setState({ loading });
     }
