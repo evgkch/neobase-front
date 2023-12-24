@@ -16,6 +16,7 @@ import { Colors } from "../../../helpers/colors";
 import { Animations } from "../../../components/Loader/Loader";
 import { status } from "../../../helpers/state";
 import { useTonConnect } from "../../../hooks/useTonConnect";
+import { client } from "../../../api";
 
 interface State {
     status: Status
@@ -68,6 +69,16 @@ export const Account = () => {
         unsubscribe = solo.content.account.rx.on('opened', init);
 
         init(solo.content.account.content);
+
+        client
+            .then(client => 
+                client.getTransactions(solo.content.account.content.contract?.address!, {
+                    limit: 10
+                })
+            )
+            .then(transactions => {
+                console.log(transactions);
+            })
 
         return () => {
             solo.content.account?.rx.off('opened', unsubscribe);
@@ -171,7 +182,7 @@ export const Account = () => {
             <div className="info">
                 <div className="box">
                    <Hero />
-                   {state.grade
+                   {state.grade !== undefined
                         ? <h2 className="purple">{state.grade.toString()} grade</h2>
                         : <h2 className="purple"><Animations.Terminal /> grade</h2>
                    }
