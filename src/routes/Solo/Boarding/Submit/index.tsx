@@ -129,7 +129,9 @@ class Component extends React.Component<Props, State> {
                 </div>
                 {this.state.loading &&
                     <Modal>
-                        <ModalLoader info={this.state.loading} />
+                        <div className="modal-content">
+                            <ModalLoader info={this.state.loading} />
+                        </div>
                     </Modal>
                 }
             </div>

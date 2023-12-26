@@ -11,19 +11,26 @@
   z-index: 999; /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  backdrop-filter: blur(10px) !important;
-  pointer-events: none;
-}
-
-.modal-content {
+  backdrop-filter: blur(10px);
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.modal-content .close {
+  position: absolute;
+  right: var(--size-m);
+  top: var(--size-m);
 }
 
 /* Content is ? */
@@ -97,29 +104,29 @@ button:hover .kaomoji {
 */
 
 .shadowed {
-  box-shadow: var(--size-xs) var(--size-xs) var(--black-color-0);
+  box-shadow: var(--size-xxs) var(--size-xxs) var(--black-color-0);
 }
 
 /* Black Box */
 
 .shadowed-black {
-  box-shadow: var(--size-xs) var(--size-xs)  var(--black-color-0);
+  box-shadow: var(--size-xxs) var(--size-xxs)  var(--black-color-0);
 }
 
 .shadowed-black-light {
-  box-shadow: var(--size-xs) var(--size-xs)  var(--black-color-1);
+  box-shadow: var(--size-xxs) var(--size-xxs)  var(--black-color-1);
 }
 
 .shadowed-purple {
-  box-shadow: var(--size-xs) var(--size-xs) var(--purple-color-acid);
+  box-shadow: var(--size-xxs) var(--size-xxs) var(--purple-color-acid);
 }
 
 .shadowed-green {
-  box-shadow: var(--size-xs) var(--size-xs) var(--green-color-acid);
+  box-shadow: var(--size-xxs) var(--size-xxs) var(--green-color-acid);
 }
 
 .shadowed-blue {
-  box-shadow: var(--size-xs) var(--size-xs) var(--blue-color-acid);
+  box-shadow: var(--size-xxs) var(--size-xxs) var(--blue-color-acid);
 }
 
 /*
@@ -152,11 +159,19 @@ button:hover .kaomoji {
   border-color: var(--purple-color-acid);
 }
 
+.bordered-purple {
+  border-color: var(--purple-color-acid);
+}
+
 .bordered-green-acid {
   border-color: var(--green-color-acid);
 }
 
 .bordered-blue-acid {
+  border-color: var(--blue-color-acid);
+}
+
+.bordered-blue {
   border-color: var(--blue-color-acid);
 }
 
@@ -300,6 +315,11 @@ button:hover .kaomoji {
 .box-purple-acid {
   background-color: var(--purple-color-acid);
 }
+
+.box-purple {
+  background-color: var(--purple-color-acid);
+}
+
 
 /*
 ----------------------------------
@@ -458,6 +478,18 @@ button.button-green-acid:hover {
 
 button.button-green-acid, button.button-green-acid:active {
   color: var(--green-color-acid);
+  border-color: var(--black-color-0);
+  background-color: var(--black-color-0);
+}
+
+button.button-purple:hover {
+  color: var(--black-color-0);
+  border-color: var(--black-color-0);
+  background-color: var(--purple-color-acid);
+}
+
+button.button-purple, button.button-purple:active {
+  color: var(--purple-color-acid);
   border-color: var(--black-color-0);
   background-color: var(--black-color-0);
 }

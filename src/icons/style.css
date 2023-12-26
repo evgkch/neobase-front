@@ -1,0 +1,23 @@
+.icon {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon path {
+    stroke-width: 3px;
+}
+
+.icon.deposit path {
+    stroke: var(--blue-color-acid);
+}
+
+.icon.withdraw path {
+    stroke: var(--purple-color-acid);
+}
+
+.icon.close path {
+    stroke: var(--black-color-0);
+}

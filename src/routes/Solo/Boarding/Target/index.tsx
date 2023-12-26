@@ -5,8 +5,10 @@ import { Kaomoji } from "../../../../helpers";
 import { Animations } from "../../../../components/Loader/Loader";
 import { Colors } from "../../../../helpers/colors";
 
-import "./style.css"
 import solo from "../../../../model/solo";
+import { InputTON } from "../../../../components/InputTON";
+
+import "./style.css";
 
 interface State {
     goalAmount: number,
@@ -78,18 +80,7 @@ export const Target = () => {
                     </div>
                 </div>
                 <div className="box box-black bordered bordered-black shadowed-green target">
-                    <label className="float-right row">
-                        <input
-                            type="number"
-                            step={1}
-                            pattern="\d*"
-                            inputMode="numeric"
-                            // defaultValue={state.goalAmount}
-                            onChange={onGoalAmountChange}
-                            value={'' + state.goalAmount}
-                        />
-                        <div>TON  <Animations.Terminal /></div>
-                    </label>
+                    <InputTON onChange={onGoalAmountChange} value={state.goalAmount} />
                 </div>
         </div>
     )

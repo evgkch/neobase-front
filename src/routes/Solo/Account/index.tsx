@@ -2,7 +2,7 @@ import {  useEffect, useState } from "react";
 import { useTonWallet } from "@tonconnect/ui-react";
 import { OpenedContract,  fromNano, toNano } from "ton-core";
 import { Status } from "../Boarding/Info";
-import { Kaomoji } from "../../../helpers";
+import { Kaomoji, sleep } from "../../../helpers";
 import { SoloAccount } from "neobase/wrappers/SoloAccount";
 import { Statistics } from "../Boarding/Info";
 
@@ -17,6 +17,10 @@ import { Animations } from "../../../components/Loader/Loader";
 import { status } from "../../../helpers/state";
 import { useTonConnect } from "../../../hooks/useTonConnect";
 import { client } from "../../../api";
+import { Modal } from "../../../components/Modal";
+import { InputTON } from "../../../components/InputTON";
+
+import * as Icons from "../../../icons";
 
 interface State {
     status: Status
@@ -37,10 +41,11 @@ export const Account = () => {
 
     const [state, setState] = useState<State>({ status: 'pending' });
 
-    const { sender } = useTonConnect();
+    const [isDeposit, setIsDeposit] = useState(false);
 
-    const [deposit, setDeposit] = useState(0);
-    const [withdraw, setWithdraw] = useState(0);
+    const [isWithdraw, setIsWithdraw] = useState(false);
+
+    const { sender } = useTonConnect();
 
     useEffect(() => {
         
@@ -86,29 +91,16 @@ export const Account = () => {
 
     }, [wallet])
 
-    const setDepositState = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.floor(Number(event.target.value));
-
-        // Update state
-        setDeposit(value);
+    async function sendDeposit(value: number) {
+        await solo.content.account.content!.contract!.sendDeposit(sender, toNano(value));
+        setIsWithdraw(true);
+        waitForUpdate(solo.content.account.content.contract!);
     }
 
-    const setWithdrawState = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Math.floor(Number(event.target.value));
-
-        // Update state
-        setWithdraw(value);
-    }
-
-    async function sendDeposit() {
-        await solo.content.account.content!.contract!.sendDeposit(sender, toNano(deposit));
-        
-        solo.openAccount(wallet!);
-    }
-
-    async function sendWithdraw() {
-        await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.05), toNano(withdraw));
-        solo.openAccount(wallet!);
+    async function sendWithdraw(value: number) {
+        await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.05), toNano(value));
+        setIsWithdraw(false);
+        waitForUpdate(solo.content.account.content.contract!);
     }
 
     async function closeAccount() {
@@ -130,6 +122,19 @@ export const Account = () => {
             default:
                 break;
         }
+    }
+
+    async function waitForUpdate(contract: OpenedContract<SoloAccount>) {
+        try {
+            const balance = await contract.getMyBalance();
+            if (Number(fromNano(balance)) !== state.balance) {
+                return loadData(contract);
+            }
+            else {
+                sleep(5000);
+                waitForUpdate(contract);
+            }
+        } catch(e) {}
     }
     
 
@@ -188,14 +193,23 @@ export const Account = () => {
                    }
                   
                 </div>
-                <div className="box">
-                    <ProgressBar progress={progress}/>
-                    {progress
-                        ? <h3>{Math.floor(progress * 100)}% progress</h3>
-                        : <h3><Animations.Terminal /> progress</h3>
-                    }
+                <div className="row">
+                    <div className="box action" onClick={() => setIsWithdraw(true)}>
+                        <Icons.Withdraw />
+                        <h3 className="withdraw">Withdraw</h3>
+                    </div>
+                    <div className="box">
+                        <ProgressBar progress={progress}/>
+                        {progress
+                            ? <h3>{Math.floor(progress * 100)}% progress</h3>
+                            : <h3><Animations.Terminal /> progress</h3>
+                        }
+                    </div>
+                    <div className="box action" onClick={() => setIsDeposit(true)}>
+                        <Icons.Deposit />
+                        <h3>Deposit</h3>
+                    </div>
                 </div>
-                
                 <div className="row">
                     <Statistics value={`${state.risk && risk2comission(state.risk)}`} status={state.status} class="value">Risk</Statistics>
                     <Statistics value={`${state.bN?.toFixed(2)}/${state.goalAmount?.toFixed(2)}`} status={state.status} class="value">TON</Statistics>
@@ -203,38 +217,18 @@ export const Account = () => {
                 </div>
             </div>
            <div className="box">
-            <div className="box box-black bordered bordered-black shadowed-green target">
-                    <label className="float-right row">
-                        <input
-                            type="number"
-                            step={1}
-                            pattern="\d*"
-                            inputMode="numeric"
-                            // defaultValue={state.goalAmount}
-                            onChange={setDepositState}
-                            value={'' + deposit}
-                        />
-                        <div>TON  <Animations.Terminal /></div>
-                    </label>
-                    <button className="button-green-acid" onClick={sendDeposit}>Deposit</button>
-                </div>
-                <div className="box box-black bordered bordered-black shadowed-green target">
-                    <label className="float-right row">
-                        <input
-                            type="number"
-                            step={1}
-                            pattern="\d*"
-                            inputMode="numeric"
-                            // defaultValue={state.goalAmount}
-                            onChange={setWithdrawState}
-                            value={'' + withdraw}
-                        />
-                        <div>TON  <Animations.Terminal /></div>
-                    </label>
-                    <button className="button-green-acid" onClick={sendWithdraw}>Withdraw</button>
-                </div>
                 <button className="button-red" onClick={closeAccount}>Close Account</button>
            </div>
+           {isDeposit &&
+            <Modal>
+                <Deposit sendDeposit={sendDeposit} close={() => setIsDeposit(false)} />
+            </Modal>
+           }
+           {isWithdraw &&
+            <Modal>
+                <Withdraw sendWithdraw={sendWithdraw} risk={state.risk!} balance={state.balance!} close={() => setIsWithdraw(false)} />
+            </Modal>
+           }
         </div>
     );
 
@@ -246,7 +240,7 @@ function ProgressBar(props: { progress?: number }) {
     return (
         <div className="bordered progress-bar">
             {props.progress !== undefined && !isNaN(props.progress) &&
-                <div className="bordered bordered-green progress" style={{ width: `${props.progress * 100}%` }}>
+                <div className="progress" style={{ width: `${props.progress * 100}%` }}>
                 </div>
             }
         </div>
@@ -259,4 +253,59 @@ function Hero() {
             <div className="reflecting">{Kaomoji.REFLECTED.CAT}</div>
         </div>
     );
+}
+
+function Deposit(props: { sendDeposit: (value: number) => Promise<void>, close: () => void }) {
+
+    const [deposit, setDeposit] = useState(1);
+
+    const setDepositState = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(event.target.value);
+        // Update state
+        setDeposit(value);
+    }
+
+    return (
+        <div className="box box-blue bordered bordered-blue shadowed account-action">
+            <div className="row float-near-border header">
+                <h2>Deposit</h2>
+                <Icons.Close close={props.close} />
+            </div>
+            <div className="box box-black bordered bordered-black shadowed-green target">
+                <InputTON value={deposit} onChange={setDepositState} />
+            </div>
+            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+            <button className="button-blue" onClick={() => props.sendDeposit(deposit)}>Send</button>
+        </div>
+    )
+}
+
+function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk: number, balance: number, close: () => void }) {
+
+    const max = props.balance / (1 + (1 / (1 << props.risk)));    
+
+    const [withdraw, setWithdraw] = useState(Math.min(1, max));
+
+    const comission = withdraw / (1 << props.risk);
+
+    const setWithdrawState = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Number(event.target.value);
+        // Update state
+        setWithdraw(Math.min(value, max));
+    }
+
+    return (
+        <div className="box box-purple bordered bordered-purple shadowed account-action">
+            <div className="row float-near-border header">
+                <h2>Withdraw</h2>
+                <Icons.Close close={props.close} />
+            </div>
+            <div className="box box-black bordered bordered-black shadowed-green target">
+                <InputTON value={Number(fromNano(toNano(withdraw)))} onChange={setWithdrawState} />
+            </div>
+            <p>Max amount to withdraw is {fromNano(toNano(max))} TON. Comission is {fromNano(toNano(comission))} TON</p>
+            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+            <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
+        </div>
+    )
 }

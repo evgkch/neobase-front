@@ -91,7 +91,9 @@ export const Boarding = () => {
             {import.meta.env.DEV && <button className="button-green-acid" onClick={() => next && next()}>Next</button>}
             {loading &&
                 <Modal>
-                    <ModalLoader info={loading} />
+                    <div className="modal-content">
+                        <ModalLoader info={loading} />
+                    </div>
                 </Modal>
             }
         </div>

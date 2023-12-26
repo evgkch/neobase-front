@@ -21,14 +21,14 @@
 
 .info .value div:first-child {
     font-weight: 800;
-    font-size: large;
+    font-size: medium;
 }
 
 .progress-bar {
     display: flex;
     background-color:black;
     height: 40px;
-    width: 50%;
+    width: 100%;
     align-self: center;
     position: relative;
 }
@@ -39,16 +39,41 @@
     align-items: center;
     justify-content: center;
     font-weight: 800;
+    border-radius: var(--size-m);
 }
 
 .info h3 {
     color: var(--green-color-acid);
     margin: 0.5em;
+    font-size: 0.8em;
 }
+
+.info .action {
+    align-items: center;
+}
+
+.info .action h3 {
+    font-weight: normal;
+    color: white;
+}
+
 
 .progress-bar .progress-loading {
     background-color: var(--purple-color-acid);
     animation: progress-loading 5s infinite linear;
+}
+
+.account-action .header {
+    align-items: center;
+    margin-bottom: var(--size-m);
+}
+
+.account-action .target {
+    margin: 0;
+}
+
+.account-action .description {
+    font-size: 0.8em;
 }
 
 @keyframes progress-loading {
