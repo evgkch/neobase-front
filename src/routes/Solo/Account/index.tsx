@@ -92,13 +92,15 @@ export const Account = () => {
     async function sendDeposit(value: number) {
         await solo.content.account.content!.contract!.sendDeposit(sender, toNano(value));
         setModal(0);
-        waitForUpdate(solo.content.account.content.contract!, 5);
+        setState({ status: 'pending' });
+        await waitForUpdate(solo.content.account.content.contract!, 5);
     }
 
     async function sendWithdraw(value: number) {
         await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.05), toNano(value));
         setModal(0);
-        waitForUpdate(solo.content.account.content.contract!, 5);
+        setState({ status: 'pending' });
+        await waitForUpdate(solo.content.account.content.contract!, 5);
     }
 
     async function closeAccount() {
@@ -124,14 +126,14 @@ export const Account = () => {
 
     async function waitForUpdate(contract: OpenedContract<SoloAccount>, attempts: number) {
         if (attempts < 1) return;
+        await sleep(5000);
         try {
             const balance = await contract.getMyBalance();
             if (Number(fromNano(balance)) !== state.balance) {
                 return loadData(contract);
             }
             else {
-                sleep(5000);
-                waitForUpdate(contract, attempts - 1);
+                return waitForUpdate(contract, attempts - 1);
             }
         } catch(e) {}
     }
@@ -206,7 +208,7 @@ export const Account = () => {
                     </div>
                     <div className="box action" onClick={() => setModal(0b010)}>
                         <Icons.Deposit />
-                        <h3>Deposit</h3>
+                        <h3>&nbsp;Deposit&nbsp;</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -216,7 +218,7 @@ export const Account = () => {
                 </div>
             </div>
            <div className="box">
-                <button className="button-red" onClick={() => setModal(0b100)}>Close Account</button>
+                <button className="button-purple" onClick={() => setModal(0b100)}>Close Account</button>
            </div>
            {modal === 0b010 &&
             <Modal>
