@@ -27,10 +27,10 @@ export function Main() {
             <div className="content">
                 <div className="scroll-box-x row stories">
                     <section>
-                        <Story title="What is Neobase? " go={() => { window.open('https://teletype.in/@neobase/intro') }}/>
+                        <Story title="What is Neobase? " go={() => { WebApp.openLink('https://teletype.in/@neobase/intro', { try_instant_view: true }) }}/>
                     </section>
                     <section>
-                        <Story title="What are Challenges? " go={() => { window.open('https://teletype.in/@neobase/challenges') }}/>
+                        <Story title="What are Challenges? " go={() => { WebApp.openLink('https://teletype.in/@neobase/challenges', { try_instant_view: true }) }}/>
                     </section>
                     <section>
                         <Story title="How starts to receive devidens? " go={() => {}}/>
