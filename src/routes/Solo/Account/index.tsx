@@ -41,9 +41,7 @@ export const Account = () => {
 
     const [state, setState] = useState<State>({ status: 'pending' });
 
-    const [isDeposit, setIsDeposit] = useState(false);
-
-    const [isWithdraw, setIsWithdraw] = useState(false);
+    const [modal, setModal] = useState(0b000);
 
     const { sender } = useTonConnect();
 
@@ -93,14 +91,14 @@ export const Account = () => {
 
     async function sendDeposit(value: number) {
         await solo.content.account.content!.contract!.sendDeposit(sender, toNano(value));
-        setIsWithdraw(true);
-        waitForUpdate(solo.content.account.content.contract!);
+        setModal(0);
+        waitForUpdate(solo.content.account.content.contract!, 5);
     }
 
     async function sendWithdraw(value: number) {
         await solo.content.account.content!.contract!.sendWithdraw(sender, toNano(0.05), toNano(value));
-        setIsWithdraw(false);
-        waitForUpdate(solo.content.account.content.contract!);
+        setModal(0);
+        waitForUpdate(solo.content.account.content.contract!, 5);
     }
 
     async function closeAccount() {
@@ -124,7 +122,8 @@ export const Account = () => {
         }
     }
 
-    async function waitForUpdate(contract: OpenedContract<SoloAccount>) {
+    async function waitForUpdate(contract: OpenedContract<SoloAccount>, attempts: number) {
+        if (attempts < 1) return;
         try {
             const balance = await contract.getMyBalance();
             if (Number(fromNano(balance)) !== state.balance) {
@@ -132,7 +131,7 @@ export const Account = () => {
             }
             else {
                 sleep(5000);
-                waitForUpdate(contract);
+                waitForUpdate(contract, attempts - 1);
             }
         } catch(e) {}
     }
@@ -180,7 +179,7 @@ export const Account = () => {
     // @ts-ignore
     const progress = state.bN / state.goalAmount;
     // @ts-ignore
-    const days = Math.floor((state.tN - state.t0) / (60 * 60 * 24));
+    const days = Math.floor((Date.now() / 1000 - state.t0) / (60 * 24));
 
     return (
         <div className="account">
@@ -194,18 +193,18 @@ export const Account = () => {
                   
                 </div>
                 <div className="row">
-                    <div className="box action" onClick={() => setIsWithdraw(true)}>
+                    <div className="box action" onClick={() => setModal(0b001)}>
                         <Icons.Withdraw />
                         <h3 className="withdraw">Withdraw</h3>
                     </div>
                     <div className="box">
                         <ProgressBar progress={progress}/>
                         {progress
-                            ? <h3>{Math.floor(progress * 100)}% progress</h3>
+                            ? <h3>{(progress * 100).toFixed(2)}% progress</h3>
                             : <h3><Animations.Terminal /> progress</h3>
                         }
                     </div>
-                    <div className="box action" onClick={() => setIsDeposit(true)}>
+                    <div className="box action" onClick={() => setModal(0b010)}>
                         <Icons.Deposit />
                         <h3>Deposit</h3>
                     </div>
@@ -217,16 +216,21 @@ export const Account = () => {
                 </div>
             </div>
            <div className="box">
-                <button className="button-red" onClick={closeAccount}>Close Account</button>
+                <button className="button-red" onClick={() => setModal(0b100)}>Close Account</button>
            </div>
-           {isDeposit &&
+           {modal === 0b010 &&
             <Modal>
-                <Deposit sendDeposit={sendDeposit} close={() => setIsDeposit(false)} />
+                <Deposit sendDeposit={sendDeposit} close={() => setModal(0)} />
             </Modal>
            }
-           {isWithdraw &&
+           {modal === 0b001 &&
             <Modal>
-                <Withdraw sendWithdraw={sendWithdraw} risk={state.risk!} balance={state.balance!} close={() => setIsWithdraw(false)} />
+                <Withdraw sendWithdraw={sendWithdraw} risk={state.risk!} balance={state.balance!} close={() => setModal(0)} />
+            </Modal>
+           }
+           {modal === 0b100 &&
+            <Modal>
+                <Close sendClose={closeAccount} close={() => setModal(0)} balance={state.balance!} risk={state.risk!} grade={Number(state.grade!)} />
             </Modal>
            }
         </div>
@@ -239,7 +243,7 @@ function ProgressBar(props: { progress?: number }) {
     
     return (
         <div className="bordered progress-bar">
-            {props.progress !== undefined && !isNaN(props.progress) &&
+            {props.progress !== undefined && !isNaN(props.progress) && props.progress > 0.01 &&
                 <div className="progress" style={{ width: `${props.progress * 100}%` }}>
                 </div>
             }
@@ -250,7 +254,7 @@ function ProgressBar(props: { progress?: number }) {
 function Hero() {
     return (
         <div className={`box box-black-purple bordered bordered-purple hero-content`}>
-            <div className="reflecting">{Kaomoji.REFLECTED.CAT}</div>
+            <div className="reflecting">{Kaomoji.REFLECTED.SUNGLASSES}</div>
         </div>
     );
 }
@@ -282,7 +286,7 @@ function Deposit(props: { sendDeposit: (value: number) => Promise<void>, close: 
 
 function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk: number, balance: number, close: () => void }) {
 
-    const max = props.balance / (1 + (1 / (1 << props.risk)));    
+    const max = props.balance / (1 + (1 / (1 << props.risk))) - 0.05;    
 
     const [withdraw, setWithdraw] = useState(Math.min(1, max));
 
@@ -303,9 +307,30 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
             <div className="box box-black bordered bordered-black shadowed-green target">
                 <InputTON value={Number(fromNano(toNano(withdraw)))} onChange={setWithdrawState} />
             </div>
-            <p>Max amount to withdraw is {fromNano(toNano(max))} TON. Comission is {fromNano(toNano(comission))} TON</p>
+            <p>Max amount to withdraw is {fromNano(toNano(max))} TON</p>
+            <p>Comission is {fromNano(toNano(comission))} TON</p>
             <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
             <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
+        </div>
+    )
+}
+
+function Close(props: { sendClose: () => Promise<void>, risk: number, balance: number, close: () => void, grade: number }) {
+
+    const max = props.balance / (1 + (1 / (1 << props.risk))) - 0.05;
+
+    const comission = max / (1 << props.risk);
+
+    return (
+        <div className="box box-purple bordered bordered-purple shadowed account-action">
+            <div className="row float-near-border header">
+                <h2>Close Account</h2>
+                <Icons.Close close={props.close} />
+            </div>
+            <p>Account will be deleted. You'll get {fromNano(toNano(max))} TON and {props.grade} Grade to your wallet</p>
+            <p>Comission is {fromNano(toNano(comission))} TON</p>
+            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+            <button className="button-purple" onClick={() => props.sendClose()}>Submit</button>
         </div>
     )
 }
