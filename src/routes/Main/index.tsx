@@ -27,7 +27,10 @@ export function Main() {
             <div className="content">
                 <div className="scroll-box-x row stories">
                     <section>
-                        <Story title="What is Neobase? " go={() => {}}/>
+                        <Story title="What is Neobase? " go={() => { window.open('https://teletype.in/@neobase/intro') }}/>
+                    </section>
+                    <section>
+                        <Story title="What are Challenges? " go={() => { window.open('https://teletype.in/@neobase/challenges') }}/>
                     </section>
                     <section>
                         <Story title="How starts to receive devidens? " go={() => {}}/>

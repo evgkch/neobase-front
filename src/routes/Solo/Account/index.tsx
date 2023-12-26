@@ -241,14 +241,11 @@ export const Account = () => {
 }
 
 function ProgressBar(props: { progress?: number }) {
-    console.log(props.progress);
+    
+    const p = props.progress || 0;
     
     return (
-        <div className="bordered progress-bar">
-            {props.progress !== undefined && !isNaN(props.progress) && props.progress > 0.01 &&
-                <div className="progress" style={{ width: `${props.progress * 100}%` }}>
-                </div>
-            }
+        <div className="bordered progress-bar" style={{ background: `linear-gradient(90deg, var(--green-color-acid) 0 ${p * 100}%, black ${p * 100}% 100%)` }}>
         </div>
     );
 }
@@ -309,8 +306,8 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
             <div className="box box-black bordered bordered-black shadowed-green target">
                 <InputTON value={Number(fromNano(toNano(withdraw)))} onChange={setWithdrawState} />
             </div>
-            <p>Max amount to withdraw is {fromNano(toNano(max))} TON</p>
-            <p>Comission is {fromNano(toNano(comission))} TON</p>
+            <p>Max amount to withdraw: {max.toFixed(4)} TON</p>
+            <p>Comission: {comission.toFixed(4)} TON</p>
             <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
             <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
         </div>

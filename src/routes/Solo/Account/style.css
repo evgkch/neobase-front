@@ -67,6 +67,11 @@
     animation: progress-loading 5s infinite linear;
 }
 
+.account-action {
+    align-self: flex-start;
+    text-align: left;
+}
+
 .account-action .header {
     align-items: center;
     margin-bottom: var(--size-m);
