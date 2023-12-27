@@ -279,7 +279,7 @@ function Deposit(props: { sendDeposit: (value: number) => Promise<void>, close: 
                 <InputTON value={deposit} onChange={setDepositState} />
             </div>
             <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
-            <button className="button-blue" onClick={() => props.sendDeposit(deposit)}>Send</button>
+            <button className="button-blue" onClick={() => props.sendDeposit(deposit)}>Send {Kaomoji.REFLECTED.MAGIC}</button>
         </div>
     )
 }
@@ -311,7 +311,7 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
                 <p>Max amount to withdraw: {max.toFixed(4)} TON</p>
                 <p>Comission: {comission.toFixed(4)} TON</p>
                 <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
-                <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
+                <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive {Kaomoji.REFLECTED.CONFUSION}</button>
             </div>
         )
     }
@@ -350,7 +350,7 @@ function Close(props: { sendClose: () => Promise<void>, risk: number, balance: n
             }</p>
             <p>Comission is {fromNano(toNano(comission))} TON</p>
             <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
-            <button className="button-purple" onClick={() => props.sendClose()}>Submit</button>
+            <button className="button-purple" onClick={() => props.sendClose()}>Submit {Kaomoji.CRYING}</button>
         </div>
     )
 }
