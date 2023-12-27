@@ -59,8 +59,8 @@ export const Info = () => {
     return (
         <>
             <div className="statistics row">
-                <Statistics value={state.accountCounter} status={state.status} class="box-white bordered bordered-white shadowed-blue">accounts</Statistics>
-                <Statistics value={state.balance} status={state.status} class="box-white bordered bordered-white shadowed-blue">TON saved</Statistics>
+                <Statistics value={state.accountCounter} status={state.status} class="box-white bordered bordered-white shadowed-blue value">accounts</Statistics>
+                <Statistics value={state.balance} status={state.status} class="box-white bordered bordered-white shadowed-blue value">TON saved</Statistics>
             </div>
         </>
     )

@@ -181,7 +181,7 @@ export const Account = () => {
     // @ts-ignore
     const progress = state.bN / state.goalAmount;
     // @ts-ignore
-    const days = Math.floor((Date.now() / 1000 - state.t0) / (60 * 24));
+    const days = Math.floor(Math.floor((Date.now() / 1000) - state.t0) / 86400);
 
     return (
         <div className="account">
@@ -199,10 +199,10 @@ export const Account = () => {
                         <Icons.Withdraw />
                         <h3 className="withdraw">Withdraw</h3>
                     </div>
-                    <div className="box">
+                    <div className="box progress-bar-container">
                         <ProgressBar progress={progress}/>
                         {progress
-                            ? <h3>{(progress * 100).toFixed(2)}% progress</h3>
+                            ? <h3>{(progress * 100).toFixed(2)}%</h3>
                             : <h3><Animations.Terminal /> progress</h3>
                         }
                     </div>
@@ -274,10 +274,11 @@ function Deposit(props: { sendDeposit: (value: number) => Promise<void>, close: 
                 <h2>Deposit</h2>
                 <Icons.Close close={props.close} />
             </div>
+            <p>Set amount to send:</p>
             <div className="box box-black bordered bordered-black shadowed-green target">
                 <InputTON value={deposit} onChange={setDepositState} />
             </div>
-            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+            <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
             <button className="button-blue" onClick={() => props.sendDeposit(deposit)}>Send</button>
         </div>
     )
@@ -297,28 +298,44 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
         setWithdraw(Math.min(value, max));
     }
 
-    return (
-        <div className="box box-purple bordered bordered-purple shadowed account-action">
-            <div className="row float-near-border header">
-                <h2>Withdraw</h2>
-                <Icons.Close close={props.close} />
+    if (props.balance >= 1) {
+        return (
+            <div className="box box-purple bordered bordered-purple shadowed account-action">
+                <div className="row float-near-border header">
+                    <h2>Withdraw</h2>
+                    <Icons.Close close={props.close} />
+                </div>
+                <div className="box box-black bordered bordered-black shadowed-green target">
+                    <InputTON value={Number(fromNano(toNano(withdraw)))} onChange={setWithdrawState} />
+                </div>
+                <p>Max amount to withdraw: {max.toFixed(4)} TON</p>
+                <p>Comission: {comission.toFixed(4)} TON</p>
+                <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+                <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
             </div>
-            <div className="box box-black bordered bordered-black shadowed-green target">
-                <InputTON value={Number(fromNano(toNano(withdraw)))} onChange={setWithdrawState} />
+        )
+    }
+    else {
+        return (
+            <div className="box box-purple bordered bordered-purple shadowed account-action">
+                <div className="row float-near-border header">
+                    <h2>Withdraw</h2>
+                    <Icons.Close close={props.close} />
+                </div>
+                <p>{'Withdraw available from balance >= 1 TON, but you can close the Account'}</p>
             </div>
-            <p>Max amount to withdraw: {max.toFixed(4)} TON</p>
-            <p>Comission: {comission.toFixed(4)} TON</p>
-            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
-            <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive</button>
-        </div>
-    )
+        )
+    }
 }
 
 function Close(props: { sendClose: () => Promise<void>, risk: number, balance: number, close: () => void, grade: number }) {
 
-    const max = props.balance / (1 + (1 / (1 << props.risk))) - 0.05;
+    const max = props.balance / (1 + (1 / (1 << props.risk)));
 
     const comission = max / (1 << props.risk);
+
+    console.log(props.grade);
+    
 
     return (
         <div className="box box-purple bordered bordered-purple shadowed account-action">
@@ -326,9 +343,13 @@ function Close(props: { sendClose: () => Promise<void>, risk: number, balance: n
                 <h2>Close Account</h2>
                 <Icons.Close close={props.close} />
             </div>
-            <p>Account will be deleted. You'll get {fromNano(toNano(max))} TON and {props.grade} Grade to your wallet</p>
+            <p>Account will be deleted. The action is irreversible!</p>
+            <p> You'll get {fromNano(toNano(max))} TON {props.grade === 0
+                ? 'but without Hero dNFT, because your Grade is 0'
+                : `and we send Hero dNFT to your wallet which Grade is ${props.grade} `
+            }</p>
             <p>Comission is {fromNano(toNano(comission))} TON</p>
-            <p className="description">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
+            <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
             <button className="button-purple" onClick={() => props.sendClose()}>Submit</button>
         </div>
     )
