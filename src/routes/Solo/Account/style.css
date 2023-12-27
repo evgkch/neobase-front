@@ -74,7 +74,10 @@
 
 .modal:has(.account-action) {
     background: none;
-    animation: account-action 300ms ease-in-out;
+    animation: account-action 300ms ease-out;
+    -webkit-animation: account-action 300ms ease-in-out;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .account-action {

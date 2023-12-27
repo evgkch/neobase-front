@@ -7,9 +7,10 @@ import { Colors } from "../../helpers/colors";
 import { Animations } from "../../components/Loader/Loader";
 //import { useEffect } from 'react';
 
+WebApp.expand();
+
 export const Welcome = () => {
 
-    WebApp.expand();
     WebApp.setHeaderColor(Colors.BLUE);
 
     const navigate = useNavigate();
