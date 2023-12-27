@@ -10,12 +10,8 @@
     stroke-width: 3px;
 }
 
-.icon.deposit path {
+.icon.deposit path, .icon.withdraw path {
     stroke: var(--blue-color-acid);
-}
-
-.icon.withdraw path {
-    stroke: var(--purple-color-acid);
 }
 
 .icon.close path {

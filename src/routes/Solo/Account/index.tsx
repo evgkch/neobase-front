@@ -300,7 +300,7 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
 
     if (props.balance >= 1) {
         return (
-            <div className="box box-purple bordered bordered-purple shadowed account-action">
+            <div className="box box-blue bordered bordered-blue shadowed account-action">
                 <div className="row float-near-border header">
                     <h2>Withdraw</h2>
                     <Icons.Close close={props.close} />
@@ -311,7 +311,7 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
                 <p>Max amount to withdraw: {max.toFixed(4)} TON</p>
                 <p>Comission: {comission.toFixed(4)} TON</p>
                 <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
-                <button className="button-purple" onClick={() => props.sendWithdraw(withdraw)}>Receive {Kaomoji.REFLECTED.CONFUSION}</button>
+                <button className="button-blue" onClick={() => props.sendWithdraw(withdraw)}>Receive {Kaomoji.REFLECTED.CONFUSION}</button>
             </div>
         )
     }

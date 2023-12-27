@@ -72,14 +72,11 @@
     animation: progress-loading 5s infinite linear;
 }
 
-.modal:has(.account-action) {
-    animation: account-action 300ms ease;
-    -webkit-animation: account-action 300ms ease;
-}
-
 .account-action {
     align-self: flex-start;
     text-align: left;
+    animation: account-action 300ms ease;
+    -webkit-animation: account-action 300ms ease;
 }
 
 .account-action p {
