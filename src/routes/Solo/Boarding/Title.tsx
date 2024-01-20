@@ -1,6 +1,6 @@
 export const Title = () => (
     <>
-        <h2>🚀 Solo start</h2>
-        <p>You don’t think you should login first and behave like human not robot.</p>
+        <h2>🚀 Solo savings</h2>
+        <p>The higher your target and risk are, the higher Grade and dividends you have</p>
     </>
 )

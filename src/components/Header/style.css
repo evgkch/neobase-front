@@ -9,16 +9,14 @@ header {
 .user {
     display: flex;
     align-items: center;
-    margin-left: 1em;
+    gap: 16px;
 }
 
 .avatar {
     color: var(--purple-color-acid);
     animation-duration: 10s !important;
-    margin-right: 1rem;
 }
 
 .connect-wallet-button button {
-    margin-inline: 1rem;
     background-color: var(--black-color-0);
 }

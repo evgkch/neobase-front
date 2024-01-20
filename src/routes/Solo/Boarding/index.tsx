@@ -106,10 +106,10 @@ function Guide() {
             <h2>How to Start?</h2>
             <ol>
                 <li>Set Target Amount</li>
-                <li>Choose Risk</li>
-                <li>Create Hero</li>
-                <li>Start to safe in comfortable way</li>
-                <li>Get dNFT in the end to your wallet and start to receive dividends</li>
+                <li>Set Risk</li>
+                <li>Choose dNFT Hero</li>
+                <li>Start saving crypto in a comfortable way</li>
+                <li>Get dNFT to your wallet and start receiving extra dividends in the end</li>
             </ol>
         </div>
     )
