@@ -252,7 +252,7 @@ function ProgressBar(props: { progress?: number }) {
 
 function Hero() {
     return (
-        <div className={`box box-black-purple bordered bordered-purple hero-content`}>
+        <div className={`box bordered bordered-purple hero-content purple`}>
             <div className="reflecting">{Kaomoji.REFLECTED.SUNGLASSES}</div>
         </div>
     );

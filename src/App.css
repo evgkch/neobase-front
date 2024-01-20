@@ -53,6 +53,14 @@
   color: var(--purple-color-acid) !important;
 }
 
+.blue {
+  color: var(--blue-color-acid) !important;
+}
+
+.green {
+  color: var(--green-color-acid) !important;
+}
+
 
 /*
 ----------------------------------
@@ -169,6 +177,10 @@ button:hover .kaomoji {
 }
 
 .bordered-blue-acid {
+  border-color: var(--blue-color-acid);
+}
+
+.bordered-blue {
   border-color: var(--blue-color-acid);
 }
 
