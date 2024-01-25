@@ -31,7 +31,7 @@ interface State {
     t0?: number,
     tN?: number,
     bN?: number,
-    grade?: bigint
+    score?: bigint
 }
 
 export const Account = () => {
@@ -146,20 +146,14 @@ export const Account = () => {
                 goalAmount,
                 restAmount,
                 risk,
-                t0,
-                tN,
-                bN,
-                grade
+                score
             ] =
                 await Promise.all([
                     contract.getMyBalance(),
-                    contract.getGoalAmount(),
+                    contract.getGoal(),
                     contract.getRestAmount(),
                     contract.getRisk(),
-                    contract.getT0(),
-                    contract.getTN(),
-                    contract.getBN(),
-                    contract.getGrade()
+                    contract.getScore()
                 ]);
                 setState({
                     ...state,
@@ -167,10 +161,7 @@ export const Account = () => {
                     goalAmount: Number(fromNano(goalAmount)),
                     restAmount: Number(fromNano(restAmount)),
                     risk,
-                    t0,
-                    tN,
-                    bN: Number(fromNano(bN)),
-                    grade,
+                    score,
                     status: 'loaded'
                 });
         } catch(e) {
@@ -181,16 +172,16 @@ export const Account = () => {
     // @ts-ignore
     const progress = state.bN / state.goalAmount;
     // @ts-ignore
-    const days = Math.floor(Math.floor((Date.now() / 1000) - state.t0) / 86400);
+    const days = 0; Math.floor(Math.floor((Date.now() / 1000) - state.t0) / 86400);
 
     return (
         <div className="account">
             <div className="info">
                 <div className="box">
                    <Hero />
-                   {state.grade !== undefined
-                        ? <h2 className="purple">{state.grade.toString()} grade</h2>
-                        : <h2 className="purple"><Animations.Terminal /> grade</h2>
+                   {state.score !== undefined
+                        ? <h2 className="purple">{state.score.toString()} jasmines</h2>
+                        : <h2 className="purple"><Animations.Terminal /> jasmines</h2>
                    }
                   
                 </div>
@@ -232,7 +223,7 @@ export const Account = () => {
            }
            {modal === 0b100 &&
             <Modal>
-                <Close sendClose={closeAccount} close={() => setModal(0)} balance={state.balance!} risk={state.risk!} grade={Number(state.grade!)} />
+                <Close sendClose={closeAccount} close={() => setModal(0)} balance={state.balance!} risk={state.risk!} score={Number(state.score!)} />
             </Modal>
            }
         </div>
@@ -328,13 +319,13 @@ function Withdraw(props: { sendWithdraw: (value: number) => Promise<void>, risk:
     }
 }
 
-function Close(props: { sendClose: () => Promise<void>, risk: number, balance: number, close: () => void, grade: number }) {
+function Close(props: { sendClose: () => Promise<void>, risk: number, balance: number, close: () => void, score: number }) {
 
     const max = props.balance / (1 + (1 / (1 << props.risk)));
 
     const comission = max / (1 << props.risk);
 
-    console.log(props.grade);
+    console.log(props.score);
     
 
     return (
@@ -344,9 +335,9 @@ function Close(props: { sendClose: () => Promise<void>, risk: number, balance: n
                 <Icons.Close close={props.close} />
             </div>
             <p>Account will be deleted. The action is irreversible!</p>
-            <p> You'll get {fromNano(toNano(max))} TON {props.grade === 0
-                ? 'but without Hero dNFT, because your Grade is 0'
-                : `and we send Hero dNFT to your wallet which Grade is ${props.grade} `
+            <p> You'll get {fromNano(toNano(max))} TON {props.score === 0
+                ? 'but without Jasmine'
+                : `and we send Jasmines: ${props.score} `
             }</p>
             <p>Comission is {fromNano(toNano(comission))} TON</p>
             <p className="notion">We do not charge gas fees. All unspent gas expenses will be deposited to your account</p>
