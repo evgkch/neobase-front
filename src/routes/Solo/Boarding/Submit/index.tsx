@@ -50,9 +50,8 @@ class Component extends React.Component<Props, State> {
 
     sendCreateAccount = async () => {
         return await solo.content.master.content.contract?.sendCreateAccount(this.props.sender, toNano(0.1), {
-            goalAmount: toNano(solo.content.boarding.content.goalAmount),
+            goal: toNano(solo.content.boarding.content.goalAmount),
             risk: solo.content.boarding.content.risk,
-            heroId: 1
         });
     }
 
@@ -81,9 +80,8 @@ class Component extends React.Component<Props, State> {
         this.setLoader('waiting for transaction confirmation...');
         try {
             await solo.content.master.content.contract?.sendCreateAccount(this.props.sender, toNano(0.1), {
-                goalAmount: toNano(solo.content.boarding.content.goalAmount),
+                goal: toNano(solo.content.boarding.content.goalAmount),
                 risk: solo.content.boarding.content.risk,
-                heroId: 1
             });
             this.setLoader('waiting for Account creation...');
             await this.unsafeWaitForAccountDeploy();
