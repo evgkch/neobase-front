@@ -170,7 +170,7 @@ export const Account = () => {
     }
     
     // @ts-ignore
-    const progress = state.bN / state.goalAmount;
+    const progress = state.balance / state.goalAmount;
     // @ts-ignore
     const days = 0; Math.floor(Math.floor((Date.now() / 1000) - state.t0) / 86400);
 
@@ -204,7 +204,7 @@ export const Account = () => {
                 </div>
                 <div className="row">
                     <Statistics value={`${state.risk && risk2comission(state.risk)}`} status={state.status} class="value">Risk</Statistics>
-                    <Statistics value={`${state.bN?.toFixed(2)}/${state.goalAmount?.toFixed(2)}`} status={state.status} class="value">TON</Statistics>
+                    <Statistics value={`${state.balance?.toFixed(2)}/${state.goalAmount?.toFixed(2)}`} status={state.status} class="value">TON</Statistics>
                     <Statistics value={days} status={state.status} class="value">Days</Statistics>
                 </div>
             </div>
